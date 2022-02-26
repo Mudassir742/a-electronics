@@ -3,7 +3,7 @@ const Category = require("../models/categoryModel");
 exports.addNewCategory = async (req, res) => {
   try {
     //get category info from request
-    const {name} = req.body;
+    const { name } = req.body;
 
     if (!name) {
       return res.status(422).json({ error: "fields are empty", data: null });
@@ -31,12 +31,42 @@ exports.addNewCategory = async (req, res) => {
         .json({ error: "unable to add category", data: null });
     }
 
-    //return the newly added category 
+    //return the newly added category
     return res.status(201).json({
       error: null,
       data: newCategory,
     });
-  } catch (error) {
+  } catch (err) {
+    console.log(err.message);
+    return res
+      .status(422)
+      .json({ error: "Unexpected error occur", data: null });
+  }
+};
+
+exports.deleteCategory = async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+    if (!categoryId) {
+      return res.status(422).json({
+        error: "Fields are empty/category not given",
+        data: null,
+      });
+    }
+
+    const isCategoryDeleted = await Category.deleteOne({ _id: categoryId });
+    if (!isCategoryDeleted.deletedCount) {
+      return res.status(444).json({
+        error: "Category not exists",
+        data: null,
+      });
+    }
+
+    return res.status(201).json({
+      error: null,
+      data: isCategoryDeleted,
+    });
+  } catch (err) {
     console.log(err.message);
     return res
       .status(422)
