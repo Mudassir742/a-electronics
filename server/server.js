@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
-const database = require("./config/database");
+const database = require("./src/config/database");
 
 
 const app = express();
