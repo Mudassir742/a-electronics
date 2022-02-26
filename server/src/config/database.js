@@ -10,6 +10,6 @@ exports.connect = () => {
       console.log("Database Access Granted");
     })
     .catch((err) => {
-      console.log(err.message);
+      console.log(err);
     });
 };
