@@ -56,7 +56,7 @@ exports.deleteCategory = async (req, res) => {
 
     const isCategoryDeleted = await Category.deleteOne({ _id: categoryId });
     if (!isCategoryDeleted.deletedCount) {
-      return res.status(444).json({
+      return res.status(422).json({
         error: "Category not exists",
         data: null,
       });
@@ -65,6 +65,43 @@ exports.deleteCategory = async (req, res) => {
     return res.status(201).json({
       error: null,
       data: isCategoryDeleted,
+    });
+  } catch (err) {
+    console.log(err.message);
+    return res
+      .status(422)
+      .json({ error: "Unexpected error occur", data: null });
+  }
+};
+
+exports.updateCategory = async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+    const { name } = req.body;
+
+    if (!categoryId) {
+      return res.status(422).json({
+        error: "No categpry found",
+        data: null,
+      });
+    }
+
+    const isCategoryUpdated = await Category.updateOne(
+      { _id: categoryId },
+      {
+        $set: { name: name },
+      }
+    );
+    if (!isCategoryUpdated.modifiedCount === 0) {
+      return res.status(422).json({
+        error: "Category not exists",
+        data: null,
+      });
+    }
+
+    return res.status(201).json({
+      error: null,
+      data: isCategoryUpdated,
     });
   } catch (err) {
     console.log(err.message);
