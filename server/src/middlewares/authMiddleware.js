@@ -18,9 +18,31 @@ exports.verifyToken = (req, res, next) => {
         .json({ error: "unexpected error while comparing token", data: null });
     }
 
+    //attach the decoded user info with the request
     req.user = authorizedData;
 
     //token is authenticated
     return next();
   });
+};
+
+//middleware for user authorization
+exports.verifyRole = (Role) => {
+  return (req, res, next) => {
+    //get the user info from request
+    const { user } = req;
+
+    //if user not given return response with error
+    if (!user) {
+      return res.status(422).json({ error: "token not given", data: null });
+    }
+
+    //if the user role match with the authorized roles send request to controller
+    if (Role.includes(user.role)) {
+      return next();
+    }
+
+    //if role not found return response with error
+    return res.status(422).json({ error: "page not found", data: null });
+  };
 };
