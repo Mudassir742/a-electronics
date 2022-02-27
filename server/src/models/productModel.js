@@ -5,19 +5,19 @@ const productSchema = mongoose.Schema(
     categoryId: {
       type: mongoose.Schema.ObjectId,
       ref: "categories",
-      required: [ture],
+      required: [true],
     },
     name: {
       type: String,
-      required: [ture, "enter product name"],
+      required: [true, "enter product name"],
     },
     price: {
       type: String,
-      required: [ture, "enter product price"],
+      required: [true, "enter product price"],
     },
     description: {
       type: String,
-      required: [ture, "enter product description"],
+      required: [true, "enter product description"],
     },
 
     quantity: {
@@ -26,11 +26,11 @@ const productSchema = mongoose.Schema(
     },
     model: {
       type: String,
-      required: [ture, "enter model name"],
+      required: [true, "enter model name"],
     },
     image: {
       type: String,
-    }
+    },
   },
 
   {
