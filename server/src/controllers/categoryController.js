@@ -139,3 +139,17 @@ exports.showCategoryById = async (req, res) => {
   }
 };
 
+exports.showAllCategory = async (req, res) => {
+  try {
+    const category = await Category.find({});
+    if (category.length === 0) {
+      return res.status(422).json({ error: "No categories found", data: null });
+    }
+    return res.status(202).json({ error: null, data: category });
+  } catch (err) {
+    console.log(err.message);
+    return res
+      .status(422)
+      .json({ error: "Unexpected error occur", data: null });
+  }
+};
