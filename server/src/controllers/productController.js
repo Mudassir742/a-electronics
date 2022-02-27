@@ -1,6 +1,5 @@
 const Product = require("../models/productModel");
 const Category = require("../models/categoryModel");
-const { json } = require("express");
 
 exports.addNewProduct = async (req, res) => {
   try {
