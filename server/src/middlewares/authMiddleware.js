@@ -11,7 +11,7 @@ exports.verifyToken = (req, res, next) => {
   }
 
   //verify and decode the token info
-  jwt.verify(token, process.env.JWT_Screte, (err, authorizedData) => {
+  jwt.verify(token, process.env.JWT_Secret, (err, authorizedData) => {
     if (err) {
       return res
         .status(422)
