@@ -73,7 +73,7 @@ exports.updateProduct = async (req, res) => {
       }
     );
 
-    if (product.modifiedCount===0) {
+    if (product.modifiedCount === 0) {
       return res.status(422).json({
         error: "Unable to update product",
         data: null,
@@ -81,6 +81,29 @@ exports.updateProduct = async (req, res) => {
     }
 
     return res.status(201).json({ error: null, data: product });
+  } catch (err) {
+    console.log(err.message);
+    return res
+      .status(422)
+      .json({ error: "Unexpected error occur", data: null });
+  }
+};
+
+exports.showProductById = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    if (!productId) {
+      return res.status(422).json({ error: "Fields are empty", data: null });
+    }
+
+    const product = await Product.findById({ _id: productId });
+    if (!product) {
+      return res
+        .status(422)
+        .json({ error: "No product found aganist ID", data: null });
+    }
+
+    res.status(201).json({ error: null, data: product });
   } catch (err) {
     console.log(err.message);
     return res
