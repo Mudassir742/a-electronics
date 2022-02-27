@@ -14,6 +14,12 @@ router.put(
   verifyRole(["admin"]),
   productController.updateProduct
 );
+router.delete(
+  "/deleteproduct/:id",
+  verifyToken,
+  verifyRole(["admin"]),
+  productController.deleteProduct
+);
 router.get("/showproduct/:id", productController.showProductById);
 router.get("/showproduct/", productController.showAllProduct);
 

@@ -41,6 +41,28 @@ exports.addNewProduct = async (req, res) => {
   }
 };
 
+exports.deleteProduct = async (req, res) => {
+  try {
+    const productId = req.params.id;
+    if (!productId) {
+      return res.status(422).json({ error: "Fields are empty", data: null });
+    }
+    const isProductDeleted = await Product.deleteOne({ _id: productId });
+    if (isProductDeleted.deletedCount===0) {
+      return res
+        .status(422)
+        .json({ error: "Unable to delete product", data: null });
+    }
+
+    return res.status(201).json({ error: null, data: isProductDeleted });
+  } catch (err) {
+    console.log(err.message);
+    return res
+      .status(422)
+      .json({ error: "Unexpected error occur", data: null });
+  }
+};
+
 exports.updateProduct = async (req, res) => {
   try {
     const productId = req.params.id;
