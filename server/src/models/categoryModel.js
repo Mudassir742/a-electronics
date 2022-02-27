@@ -4,10 +4,11 @@ const categorySchema = mongoose.Schema(
   {
     name: {
       type: String,
-      required: [(true, "enter category name")],
+      required: [true, "enter category name"],
     },
     quantity: {
       type: Number,
+      default:0
     },
   },
   {
