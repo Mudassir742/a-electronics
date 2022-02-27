@@ -1,5 +1,6 @@
 const Product = require("../models/productModel");
 const Category = require("../models/categoryModel");
+const { json } = require("express");
 
 exports.addNewProduct = async (req, res) => {
   try {
@@ -101,6 +102,22 @@ exports.showProductById = async (req, res) => {
       return res
         .status(422)
         .json({ error: "No product found aganist ID", data: null });
+    }
+
+    res.status(201).json({ error: null, data: product });
+  } catch (err) {
+    console.log(err.message);
+    return res
+      .status(422)
+      .json({ error: "Unexpected error occur", data: null });
+  }
+};
+
+exports.showAllProduct = async (req, res) => {
+  try {
+    const product = await Product.find({});
+    if (!product) {
+      return res.status(422).json({ error: "No product found", data: null });
     }
 
     res.status(201).json({ error: null, data: product });
