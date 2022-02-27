@@ -7,11 +7,11 @@ exports.verifyToken = (req, res, next) => {
 
   //if token not given return response with error
   if (!token) {
-    return res.status(422).json({ error: "token not given" });
+    return res.status(422).json({ error: "token not given" ,data:null});
   }
 
   //verify and decode the token info
-  jwt.verify(token, process.env.JWT_Screte, (err, authorizedData) => {
+  jwt.verify(token, process.env.JWT_Secret, (err, authorizedData) => {
     if (err) {
       return res
         .status(422)
