@@ -81,11 +81,13 @@ exports.updateCategory = async (req, res) => {
 
     if (!categoryId) {
       return res.status(422).json({
-        error: "No categpry found",
+        error: "No category ID",
         data: null,
       });
     }
-
+    if (!name) {
+      return res.status(422).json({ error: "fields are empty", data: null });
+    }
     const isCategoryUpdated = await Category.updateOne(
       { _id: categoryId },
       {
@@ -110,3 +112,30 @@ exports.updateCategory = async (req, res) => {
       .json({ error: "Unexpected error occur", data: null });
   }
 };
+
+exports.showCategoryById = async (req, res) => {
+  try {
+    const categoryId = req.params.id;
+    if (!categoryId) {
+      return res.status(422).json({
+        error: "No categpry found",
+        data: null,
+      });
+    }
+
+    const category = await Category.findOne({ _id: categoryId });
+    if (!category) {
+      return res
+        .status(422)
+        .json({ error: "no category found aganist ID", data: null });
+    }
+
+    return res.status(202).json({ error: null, data: category });
+  } catch (err) {
+    console.log(err.message);
+    return res
+      .status(422)
+      .json({ error: "Unexpected error occur", data: null });
+  }
+};
+
