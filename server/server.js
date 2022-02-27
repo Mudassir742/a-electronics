@@ -3,7 +3,8 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 
 const database = require("./src/config/database");
-const userRoute = require('./src/routes/userRoute')
+const userRoute = require("./src/routes/userRoute");
+const categoryRoute = require("./src/routes/categoryRoute");
 
 const app = express();
 
@@ -14,7 +15,8 @@ app.use(express.urlencoded({ extended: true }));
 
 database.connect();
 
-app.use("/api/user",userRoute)
+app.use("/api/user", userRoute);
+app.use("/api/category", categoryRoute);
 
 app.listen(process.env.PORT, () =>
   console.log(`Server is up and running at port:${process.env.PORT}!`)
