@@ -4,30 +4,30 @@ const categoryController = require("../controllers/categoryController");
 const { verifyToken, verifyRole } = require("../middlewares/authMiddleware");
 
 router.post(
-  "/addcategory",
+  "/add-category",
   // verifyToken,
   // verifyRole(["admin"]),
   categoryController.addNewCategory
 );
 router.delete(
-  "/deletecategory/:id",
+  "/delete-category/:id",
   // verifyToken,
   // verifyRole(["admin"]),
   categoryController.deleteCategory
 );
 router.put(
-  "/updatecategory/:id",
+  "/update-category/:id",
   // verifyToken,
   // verifyRole(["admin"]),
   categoryController.updateCategory
 );
 router.get(
-  "/showcategory/:id",
+  "/show-category/:id",
   // verifyToken,
   categoryController.showCategoryById
 );
 router.get(
-  "/showcategory",
+  "/show-category",
   //verifyToken,
   categoryController.showAllCategory
 );

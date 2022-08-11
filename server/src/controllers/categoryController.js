@@ -2,75 +2,65 @@ const Category = require("../models/categoryModel");
 
 exports.addNewCategory = async (req, res) => {
   try {
-    //get category info from request
     const { name } = req.body;
 
     if (!name) {
-      return res.status(422).json({ error: "fields are empty", data: null });
+      return res.status(400).json({ error: "bad input" });
     }
 
-    //check if the category already exists
-    const isCategoryAlreadyExisted = await Category.find({ name: name });
+    const isCategoryAlreadyExisted = await Category.findOne({ name: name });
 
-    //if category  already exists return response with error
-    if (isCategoryAlreadyExisted.length !== 0) {
-      return res
-        .status(422)
-        .json({ error: "category already existed", data: null });
+    if (isCategoryAlreadyExisted) {
+      return res.status(409).json({ error: "category already existed" });
     }
 
-    //create a new category and save it in database
     const newCategory = await Category.create({
       name,
     });
 
-    //if user is not saved return response with error
     if (!newCategory) {
-      return res
-        .status(422)
-        .json({ error: "unable to add category", data: null });
+      return res.status(422).json({ error: "unable to add category" });
     }
 
-    //return the newly added category
-    return res.status(201).json({
-      error: null,
+    return res.status(200).json({
       data: newCategory,
     });
   } catch (err) {
     console.log(err.message);
     return res
       .status(422)
-      .json({ error: "Unexpected error occur", data: null });
+      .json({ error: "Unexpected server error while add category" });
   }
 };
 
 exports.deleteCategory = async (req, res) => {
   try {
     const categoryId = req.params.id;
+
     if (!categoryId) {
-      return res.status(422).json({
-        error: "Fields are empty/category not given",
-        data: null,
+      return res.status(409).json({
+        error: "bad input",
       });
     }
 
-    const isCategoryDeleted = await Category.deleteOne({ _id: categoryId });
-    if (!isCategoryDeleted.deletedCount) {
+    const isCategoryDeleted = await Category.findByIdAndDelete({
+      _id: categoryId,
+    });
+
+    if (!isCategoryDeleted) {
       return res.status(422).json({
-        error: "Category not exists",
-        data: null,
+        data: "unable to delete category",
       });
     }
 
-    return res.status(201).json({
-      error: null,
-      data: isCategoryDeleted,
+    return res.status(200).json({
+      data: "category deleted succesfully",
     });
   } catch (err) {
     console.log(err.message);
     return res
       .status(422)
-      .json({ error: "Unexpected error occur", data: null });
+      .json({ error: "Unexpected server error while deleting category" });
   }
 };
 
@@ -79,77 +69,70 @@ exports.updateCategory = async (req, res) => {
     const categoryId = req.params.id;
     const { name } = req.body;
 
-    if (!categoryId) {
-      return res.status(422).json({
-        error: "No category ID",
-        data: null,
+    if (!categoryId || !name) {
+      return res.status(409).json({
+        error: "bad input",
       });
     }
-    if (!name) {
-      return res.status(422).json({ error: "fields are empty", data: null });
-    }
-    const isCategoryUpdated = await Category.updateOne(
+
+    const isCategoryUpdated = await Category.findByIdAndUpdate(
       { _id: categoryId },
       {
         $set: { name: name },
       }
     );
-    if (!isCategoryUpdated.modifiedCount === 0) {
+
+    if (!isCategoryUpdated) {
       return res.status(422).json({
-        error: "Category not exists",
-        data: null,
+        data: "unable to update category",
       });
     }
 
-    return res.status(201).json({
-      error: null,
-      data: isCategoryUpdated,
+    return res.status(200).json({
+      data: "category updated succesfully",
     });
   } catch (err) {
     console.log(err.message);
     return res
       .status(422)
-      .json({ error: "Unexpected error occur", data: null });
+      .json({ error: "Unexpected server error while updating category" });
   }
 };
 
 exports.showCategoryById = async (req, res) => {
   try {
     const categoryId = req.params.id;
+
     if (!categoryId) {
-      return res.status(422).json({
-        error: "No categpry found",
-        data: null,
+      return res.status(409).json({
+        error: "bad input",
       });
     }
 
     const category = await Category.findOne({ _id: categoryId });
+
     if (!category) {
-      return res
-        .status(422)
-        .json({ error: "no category found aganist ID", data: null });
+      return res.status(404).json({ error: "no category found" });
     }
 
-    return res.status(202).json({ error: null, data: category });
+    return res.status(200).json({ data: category });
   } catch (err) {
     console.log(err.message);
     return res
-      .status(422)
-      .json({ error: "Unexpected error occur", data: null });
+      .status(500)
+      .json({ error: "Unexpected error server error while getting category" });
   }
 };
 
 exports.showAllCategory = async (req, res) => {
   try {
     const category = await Category.find({});
-    if (category.length === 0) {
-      return res.status(422).json({ error: "No categories found", data: null });
-    }
-    return res.status(202).json({ error: null, data: category });
+
+    return res.status(200).json({ data: category });
   } catch (err) {
     console.log(err.message);
     return res
-      .status(422)
-      .json({ error: "Unexpected error occur", data: null });
+      .status(500)
+      .json({ error: "Unexpected error server error while getting category" });
   }
 };

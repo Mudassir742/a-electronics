@@ -71,7 +71,9 @@ exports.userLogin = async (req, res) => {
     }
 
     //check if the email is registered with user
-    const existedUser = await User.findOne({ email: email });
+    const existedUser = await User.findOne({ email: email }).select(
+      "+password"
+    );
 
     console.log(existedUser);
 
@@ -130,6 +132,8 @@ exports.userLogin = async (req, res) => {
     );
   } catch (err) {
     console.log("Error in Login catch : ", err.message);
-    return res.status(422).json({ error: err.message, data: null });
+    return res
+      .status(500)
+      .json({ error: "unexpected server error while login", data: null });
   }
 };
