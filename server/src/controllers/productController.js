@@ -6,7 +6,7 @@ exports.addNewProduct = async (req, res) => {
     const { categoryId, name, price, description, quantity, model } = req.body;
 
     if (!categoryId || !name || !price || !description || !quantity || !model) {
-      return res.status(409).json({
+      return res.status(400).json({
         error: "bad input",
       });
     }
@@ -41,7 +41,7 @@ exports.deleteProduct = async (req, res) => {
   try {
     const productId = req.params.id;
     if (!productId) {
-      return res.status(409).json({ error: "bad input" });
+      return res.status(400).json({ error: "bad input" });
     }
     const isProductDeleted = await Product.findByIdAndDelete({
       _id: productId,
@@ -65,7 +65,7 @@ exports.updateProduct = async (req, res) => {
 
     const { categoryId, name, price, description, quantity, model } = req.body;
     if (!categoryId || !name || !price || !description || !quantity || !model) {
-      return res.status(409).json({
+      return res.status(400).json({
         error: "bad input",
       });
     }
@@ -103,13 +103,13 @@ exports.showProductById = async (req, res) => {
   try {
     const productId = req.params.id;
     if (!productId) {
-      return res.status(409).json({ error: "bad input" });
+      return res.status(400).json({ error: "bad input" });
     }
 
     const product = await Product.findById({ _id: productId });
 
     if (!product) {
-      return res.status(422).json({ error: "No product found" });
+      return res.status(404).json({ error: "No product found" });
     }
 
     res.status(200).json({ data: product });
@@ -125,7 +125,7 @@ exports.showAllProduct = async (req, res) => {
   try {
     const product = await Product.find({});
 
-    res.status(201).json({ data: product });
+    res.status(200).json({ data: product });
   } catch (err) {
     console.log(err.message);
     return res

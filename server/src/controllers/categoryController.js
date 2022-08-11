@@ -38,7 +38,7 @@ exports.deleteCategory = async (req, res) => {
     const categoryId = req.params.id;
 
     if (!categoryId) {
-      return res.status(409).json({
+      return res.status(400).json({
         error: "bad input",
       });
     }
@@ -70,7 +70,7 @@ exports.updateCategory = async (req, res) => {
     const { name } = req.body;
 
     if (!categoryId || !name) {
-      return res.status(409).json({
+      return res.status(400).json({
         error: "bad input",
       });
     }
@@ -104,7 +104,7 @@ exports.showCategoryById = async (req, res) => {
     const categoryId = req.params.id;
 
     if (!categoryId) {
-      return res.status(409).json({
+      return res.status(400).json({
         error: "bad input",
       });
     }

@@ -3,31 +3,22 @@ const jwt = require("jsonwebtoken");
 
 const User = require("../models/userModel");
 
-//create an account for new user
 exports.addNewUser = async (req, res) => {
   try {
-    //get user info from request
     const { firstName, lastName, email, password } = req.body;
 
-    //return response with error if any of the field is empty
     if (!firstName || !lastName || !email || !password) {
-      return res.status(422).json({ error: "fields are empty", data: null });
+      return res.status(400).json({ error: "bad input" });
     }
 
-    //check if the email is already registered with any other user
-    const isEmailAlreadyExisted = await User.find({ email: email });
+    const isEmailAlreadyExisted = await User.findOne({ email: email });
 
-    //if email is already registered return response with error
-    if (isEmailAlreadyExisted.length !== 0) {
-      return res
-        .status(422)
-        .json({ error: "email already existed", data: null });
+    if (isEmailAlreadyExisted) {
+      return res.status(409).json({ error: "email already existed" });
     }
 
-    //encrypt the password before saving in database
     const encryptedPasswrod = await bcrypt.hash(password, 10);
 
-    //create a new user and save it in database
     const newUser = await User.create({
       firstName,
       lastName,
@@ -35,15 +26,11 @@ exports.addNewUser = async (req, res) => {
       password: encryptedPasswrod,
     });
 
-    //if user is not saved return response with error
     if (!newUser) {
-      return res
-        .status(422)
-        .json({ error: "unable to register user", data: null });
+      return res.status(422).json({ error: "unable to register user" });
     }
 
-    //return the newly registered name & role in response
-    return res.status(201).json({
+    return res.status(200).json({
       error: null,
       data: {
         userID: newUser._id,
@@ -54,35 +41,30 @@ exports.addNewUser = async (req, res) => {
   } catch (err) {
     console.log(err.message);
     return res
-      .status(422)
-      .json({ error: "unexpected error in catch", data: null });
+      .status(500)
+      .json({ error: "unexpected server error while adding user" });
   }
 };
 
 //login an existing user
 exports.userLogin = async (req, res) => {
   try {
-    //get user info from request
     const { email, password } = req.body;
 
-    //return response with error if any of the field is empty
     if (!email || !password) {
-      return res.status(422).json({ error: "fields are empty", data: null });
+      return res.status(400).json({ error: "bad input" });
     }
 
-    //check if the email is registered with user
     const existedUser = await User.findOne({ email: email }).select(
       "+password"
     );
 
     console.log(existedUser);
 
-    //if user with this email not found return response with error
     if (!existedUser) {
-      return res.status(422).json({ error: "user not found", data: null });
+      return res.status(404).json({ error: "user not found" });
     }
 
-    //authenticate the password
     const isPasswordCorrect = await bcrypt.compare(
       password,
       existedUser.password
@@ -90,14 +72,10 @@ exports.userLogin = async (req, res) => {
 
     console.log(isPasswordCorrect);
 
-    //if password not matched return response with error
     if (!isPasswordCorrect) {
-      return res
-        .status(422)
-        .json({ error: "incorrect email or password", data: null });
+      return res.status(401).json({ error: "incorrect email or password" });
     }
 
-    //sign a JWT token with logged in user info
     jwt.sign(
       {
         name: existedUser.name,
@@ -118,8 +96,7 @@ exports.userLogin = async (req, res) => {
 
         console.log(token);
 
-        //return response with user info and token
-        return res.status(201).json({
+        return res.status(200).json({
           error: null,
           data: {
             name: existedUser.firstName + " " + existedUser.lastName,
@@ -134,6 +111,6 @@ exports.userLogin = async (req, res) => {
     console.log("Error in Login catch : ", err.message);
     return res
       .status(500)
-      .json({ error: "unexpected server error while login", data: null });
+      .json({ error: "unexpected server error while login" });
   }
 };
