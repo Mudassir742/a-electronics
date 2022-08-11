@@ -4,20 +4,20 @@ const { verifyToken, verifyRole } = require("../middlewares/authMiddleware");
 
 router.post(
   "/addproduct",
-  verifyToken,
-  verifyRole(["admin"]),
+  // verifyToken,
+  // verifyRole(["admin"]),
   productController.addNewProduct
 );
 router.put(
   "/updateProduct/:id",
-  verifyToken,
-  verifyRole(["admin"]),
+  // verifyToken,
+  // verifyRole(["admin"]),
   productController.updateProduct
 );
 router.delete(
   "/deleteproduct/:id",
-  verifyToken,
-  verifyRole(["admin"]),
+  // verifyToken,
+  // verifyRole(["admin"]),
   productController.deleteProduct
 );
 router.get("/showproduct/:id", productController.showProductById);

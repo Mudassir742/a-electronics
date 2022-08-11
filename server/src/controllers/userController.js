@@ -104,7 +104,7 @@ exports.userLogin = async (req, res) => {
         role: existedUser.role,
       },
       process.env.JWT_Secret,
-      { expiresIn: "1h" },
+      { expiresIn: "30d" },
       async (err, token) => {
         //if (err) throw err.message;
         if (err) {
@@ -120,7 +120,7 @@ exports.userLogin = async (req, res) => {
         return res.status(201).json({
           error: null,
           data: {
-            name: existedUser.firstName +" "+existedUser.lastName,
+            name: existedUser.firstName + " " + existedUser.lastName,
             userID: existedUser._id,
             role: existedUser.role,
             token: token,

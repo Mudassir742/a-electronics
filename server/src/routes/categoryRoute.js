@@ -5,27 +5,31 @@ const { verifyToken, verifyRole } = require("../middlewares/authMiddleware");
 
 router.post(
   "/addcategory",
-  verifyToken,
-  verifyRole(["admin"]),
+  // verifyToken,
+  // verifyRole(["admin"]),
   categoryController.addNewCategory
 );
 router.delete(
   "/deletecategory/:id",
-  verifyToken,
-  verifyRole(["admin"]),
+  // verifyToken,
+  // verifyRole(["admin"]),
   categoryController.deleteCategory
 );
 router.put(
   "/updatecategory/:id",
-  verifyToken,
-  verifyRole(["admin"]),
+  // verifyToken,
+  // verifyRole(["admin"]),
   categoryController.updateCategory
 );
 router.get(
   "/showcategory/:id",
-  verifyToken,
+  // verifyToken,
   categoryController.showCategoryById
 );
-router.get("/showcategory", verifyToken, categoryController.showAllCategory);
+router.get(
+  "/showcategory",
+  //verifyToken,
+  categoryController.showAllCategory
+);
 
 module.exports = router;

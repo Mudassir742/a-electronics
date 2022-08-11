@@ -48,7 +48,7 @@ exports.deleteProduct = async (req, res) => {
       return res.status(422).json({ error: "Fields are empty", data: null });
     }
     const isProductDeleted = await Product.deleteOne({ _id: productId });
-    if (isProductDeleted.deletedCount===0) {
+    if (isProductDeleted.deletedCount === 0) {
       return res
         .status(422)
         .json({ error: "Unable to delete product", data: null });
