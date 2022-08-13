@@ -21,8 +21,6 @@ import Iconify from "../components/Iconify";
 //import Label from "../components/Label";
 import { TableListHead, TableListToolbar } from "../sections/@dashboard/Table";
 
-// ----------------------------------------------------------------------
-
 const TABLE_HEAD = [
   { id: "no", label: "No#", alignRight: false },
   { id: "name", label: "Name", alignRight: false },
@@ -45,7 +43,7 @@ export default function Categories() {
           <Button
             variant="contained"
             component={RouterLink}
-            to="/dashboard/all-projects/new-project"
+            to="/dashboard/categories/category-form"
             startIcon={<Iconify icon="eva:plus-fill" />}
           >
             New Category

@@ -5,21 +5,37 @@ import {
   FormHelperText,
   InputLabel,
   OutlinedInput,
+  Typography,
   Box,
   Grid,
 } from "@mui/material";
-//import { styled } from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
+
+import Page from "../Page";
 
 // third party
 import * as Yup from "yup";
 import { Formik } from "formik";
 import { LoadingButton } from "@mui/lab";
 
+// -------------------------------Style Components-----------------------------------
+
+const PageWrapper = styled(Page)(({ theme }) => ({
+  padding: "1rem",
+}));
+
+// -----------------------------------------------------------------------------------
+
 const CategoryForm = () => {
   const handleAddCategory = () => {};
 
   return (
-    <>
+    <PageWrapper title="Categories">
+      <Box marginBottom={3}>
+        <Typography variant="h4" gutterBottom>
+          Add Category
+        </Typography>
+      </Box>
       <Formik
         initialValues={{
           name: "",
@@ -83,7 +99,7 @@ const CategoryForm = () => {
           </form>
         )}
       </Formik>
-    </>
+    </PageWrapper>
   );
 };
 

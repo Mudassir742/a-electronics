@@ -6,6 +6,7 @@ import DashboardLayout from "../layouts/dashboard";
 import NotFound from "../pages/Page404";
 import DashboardApp from "../pages/DashboardApp";
 import Category from "src/pages/Category";
+import CategoryForm from "src/components/forms/CategoryForm";
 
 // ----------------------------------------------------------------------
 
@@ -26,6 +27,10 @@ export default function Router() {
         {
           path: "categories",
           element: <Category />,
+        },
+        {
+          path: "categories/category-form",
+          element: <CategoryForm />,
         },
       ],
     },
