@@ -15,7 +15,7 @@ import {
 } from "@mui/material";
 //import { styled } from "@mui/material/styles";
 
-import { QueryClient, useMutation, useQuery } from "react-query";
+import { useQueryClient, useMutation, useQuery } from "react-query";
 
 // components
 import Page from "../components/Page";
@@ -39,7 +39,7 @@ const TABLE_HEAD = [
 ];
 
 export default function Categories() {
-  const queryClient = new QueryClient();
+  const queryClient = useQueryClient();
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [deleteCategoryId, setDeleteCategoryId] = useState("");
 
@@ -47,7 +47,7 @@ export default function Categories() {
     "categories",
     async () => {
       const categoryResponse = await categoryInstance.get("/show-category");
-      console.log(categoryResponse);
+
       return categoryResponse.data.data;
     }
   );
@@ -62,9 +62,8 @@ export default function Categories() {
     },
     {
       onSuccess: (data) => {
-        console.log(data);
         queryClient.setQueryData("categories", data);
-        //setOpenDeleteModal(false);
+        setOpenDeleteModal(false);
       },
       onError: (error) => {
         console.log(error);

@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import { useMutation, useQueryClient } from "react-query";
+import { useMutation } from "react-query";
 
 import Page from "../Page";
 
@@ -32,11 +32,9 @@ const PageWrapper = styled(Page)(({ theme }) => ({
 // -----------------------------------------------------------------------------------
 
 const CategoryForm = () => {
-  const queryClient = useQueryClient();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const isEdit = JSON.parse(searchParams.get("isEdit"));
-  console.log(isEdit);
   const { categoryId } = useParams();
   const [Loading, setLoading] = useState(false);
   const [category, setCategory] = useState({
@@ -78,7 +76,6 @@ const CategoryForm = () => {
     },
     {
       onSuccess: (data) => {
-        queryClient.invalidateQueries("categories");
         navigate("/dashboard/categories");
       },
       onError: (error) => {
@@ -91,7 +88,7 @@ const CategoryForm = () => {
     <PageWrapper title="Categories">
       <Box marginBottom={3}>
         <Typography variant="h4" gutterBottom>
-          {isEdit === true ? `Add Category` : `Edit Category`}
+          {isEdit === true ? `Edit Category` : `Add Category`}
         </Typography>
       </Box>
       <Formik
@@ -150,7 +147,7 @@ const CategoryForm = () => {
                     variant="contained"
                     disabled={Loading}
                   >
-                    {isEdit === true ? `Add` : `Update`}
+                    {isEdit === true ? `Update` : `Add`}
                   </LoadingButton>
                 </Box>
               </Grid>
