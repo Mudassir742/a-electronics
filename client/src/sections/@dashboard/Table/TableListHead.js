@@ -3,7 +3,7 @@ import { TableRow, TableCell, TableHead } from "@mui/material";
 
 // ----------------------------------------------------------------------
 
-export default function ProjectTaskListHead({ headLabel }) {
+export default function TableListHead({ headLabel }) {
   return (
     <TableHead>
       <TableRow>

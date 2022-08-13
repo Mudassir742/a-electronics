@@ -12,20 +12,10 @@ const navConfig = [
     icon: getIcon("eva:pie-chart-2-fill"),
   },
   {
-    title: "all projects",
-    path: "/dashboard/all-projects",
-    icon: getIcon("fa-solid:project-diagram"),
-  },
-  {
-    title: "all teams",
-    path: "/dashboard/all-teams",
-    icon: getIcon("fluent:people-team-28-filled"),
-  },
-  {
-    title: "my tasks",
-    path: "/dashboard/my-tasks",
-    icon: getIcon("fluent:clipboard-task-list-ltr-24-filled"),
-  },
+    title: "Category",
+    path: "/dashboard/categories",
+    icon: getIcon("ic:round-category"),
+  }
 ];
 
 export default navConfig;

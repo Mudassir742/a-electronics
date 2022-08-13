@@ -15,7 +15,7 @@ const RootStyle = styled(Toolbar)(({ theme }) => ({
 
 // ----------------------------------------------------------------------
 
-export default function MyTaskListToolbar({ onFilterChange, currentFilter }) {
+export default function TableListToolbar({ onFilterChange, currentFilter }) {
   return (
     <RootStyle>
       <Tooltip title="Filter list">
