@@ -125,7 +125,7 @@ export default function Products() {
                         </TableCell>
                         <TableCell component="th" scope="row" padding="normal">
                           <Typography variant="subtitle3" noWrap>
-                            {product?.categoryId.name}
+                            {product?.categoryId?.name}
                           </Typography>
                         </TableCell>
                         <TableCell component="th" scope="row" padding="normal">

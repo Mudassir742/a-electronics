@@ -123,8 +123,10 @@ exports.showProductById = async (req, res) => {
 
 exports.showAllProduct = async (req, res) => {
   try {
-    const product = await Product.find({});
-
+    const product = await Product.find({}).populate({
+      path: "categoryId",
+      select: "name _id",
+    });
     res.status(200).json({ data: product });
   } catch (err) {
     console.log(err.message);
