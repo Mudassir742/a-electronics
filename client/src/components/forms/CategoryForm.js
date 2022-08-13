@@ -1,5 +1,6 @@
 // material-ui
 import React from "react";
+import { useNavigate } from "react-router-dom";
 import {
   FormControl,
   FormHelperText,
@@ -11,12 +12,16 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
+import { useMutation, useQueryClient } from "react-query";
+
 import Page from "../Page";
 
 // third party
 import * as Yup from "yup";
 import { Formik } from "formik";
 import { LoadingButton } from "@mui/lab";
+
+import categoryInstance from "src/axios/categoryInstance";
 
 // -------------------------------Style Components-----------------------------------
 
@@ -27,7 +32,26 @@ const PageWrapper = styled(Page)(({ theme }) => ({
 // -----------------------------------------------------------------------------------
 
 const CategoryForm = () => {
-  const handleAddCategory = () => {};
+  const queryClient = useQueryClient();
+  const navigate = useNavigate();
+
+  const handleAddCategory = useMutation(
+    async (values) => {
+      console.log(values);
+      await categoryInstance.post("/add-category", {
+        name: values.name,
+      });
+    },
+    {
+      onSuccess: (data) => {
+        queryClient.invalidateQueries("categories");
+        navigate("/dashboard/categories");
+      },
+      onError: (error) => {
+        console.log(error);
+      },
+    }
+  );
 
   return (
     <PageWrapper title="Categories">
@@ -41,10 +65,10 @@ const CategoryForm = () => {
           name: "",
         }}
         validationSchema={Yup.object().shape({
-          title: Yup.string().max(255).required("Name is required"),
+          name: Yup.string().max(255).required("Name is required"),
         })}
         enableReinitialize={true}
-        onSubmit={handleAddCategory}
+        onSubmit={(values) => handleAddCategory.mutate(values)}
       >
         {({
           errors,

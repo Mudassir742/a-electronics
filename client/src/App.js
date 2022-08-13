@@ -4,14 +4,22 @@ import Router from "./routes/routes";
 import ThemeProvider from "./theme";
 // components
 import ScrollToTop from "./components/ScrollToTop";
+//reat-query
+import { QueryClientProvider, QueryClient } from "react-query";
+import { ReactQueryDevtools } from "react-query/devtools";
 
 // ----------------------------------------------------------------------
 
+const queryClient = new QueryClient();
+
 export default function App() {
   return (
-    <ThemeProvider>
-      <ScrollToTop />
-      <Router />
-    </ThemeProvider>
+    <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={true} />
+      <ThemeProvider>
+        <ScrollToTop />
+        <Router />
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }
