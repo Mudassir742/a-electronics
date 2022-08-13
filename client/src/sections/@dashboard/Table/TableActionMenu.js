@@ -1,13 +1,19 @@
-import { useRef, useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import { useRef, useState } from "react";
+import { Link as RouterLink } from "react-router-dom";
 // material
-import { Menu, MenuItem, IconButton, ListItemIcon, ListItemText } from '@mui/material';
+import {
+  Menu,
+  MenuItem,
+  IconButton,
+  ListItemIcon,
+  ListItemText,
+} from "@mui/material";
 // component
-import Iconify from '../../../components/Iconify';
+import Iconify from "../../../components/Iconify";
 
 // ----------------------------------------------------------------------
 
-export default function TableActionMenu() {
+export default function TableActionMenu({ categoryId }) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -22,23 +28,32 @@ export default function TableActionMenu() {
         anchorEl={ref.current}
         onClose={() => setIsOpen(false)}
         PaperProps={{
-          sx: { width: 200, maxWidth: '100%' },
+          sx: { width: 200, maxWidth: "100%" },
         }}
-        anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
-        transformOrigin={{ vertical: 'top', horizontal: 'right' }}
+        anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        transformOrigin={{ vertical: "top", horizontal: "right" }}
       >
-        <MenuItem sx={{ color: 'text.secondary' }}>
-          <ListItemIcon>
-            <Iconify icon="eva:trash-2-outline" width={24} height={24} />
-          </ListItemIcon>
-          <ListItemText primary="Delete" primaryTypographyProps={{ variant: 'body2' }} />
-        </MenuItem>
-
-        <MenuItem component={RouterLink} to="#" sx={{ color: 'text.secondary' }}>
+        <MenuItem
+          component={RouterLink}
+          to={`/dashboard/categories/category-form/${categoryId}?isEdit=true`}
+          sx={{ color: "text.secondary" }}
+        >
           <ListItemIcon>
             <Iconify icon="eva:edit-fill" width={24} height={24} />
           </ListItemIcon>
-          <ListItemText primary="Edit" primaryTypographyProps={{ variant: 'body2' }} />
+          <ListItemText
+            primary="Edit"
+            primaryTypographyProps={{ variant: "body2" }}
+          />
+        </MenuItem>
+        <MenuItem sx={{ color: "text.secondary" }}>
+          <ListItemIcon>
+            <Iconify icon="eva:trash-2-outline" width={24} height={24} />
+          </ListItemIcon>
+          <ListItemText
+            primary="Delete"
+            primaryTypographyProps={{ variant: "body2" }}
+          />
         </MenuItem>
       </Menu>
     </>

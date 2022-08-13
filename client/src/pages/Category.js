@@ -59,7 +59,7 @@ export default function Categories() {
           <Button
             variant="contained"
             component={RouterLink}
-            to="/dashboard/categories/category-form"
+            to="/dashboard/categories/category-form?isEdit=false"
             startIcon={<Iconify icon="eva:plus-fill" />}
           >
             New Category
@@ -96,7 +96,7 @@ export default function Categories() {
                           </Typography>
                         </TableCell>
                         <TableCell component="th" scope="row" padding="normal">
-                          <TableActionMenu />
+                          <TableActionMenu categoryId={category._id} />
                         </TableCell>
                       </TableRow>
                     ))}

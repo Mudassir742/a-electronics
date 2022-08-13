@@ -32,6 +32,10 @@ export default function Router() {
           path: "categories/category-form",
           element: <CategoryForm />,
         },
+        {
+          path: "categories/category-form/:categoryId",
+          element: <CategoryForm />,
+        },
       ],
     },
     {

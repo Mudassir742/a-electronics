@@ -1,6 +1,6 @@
 // material-ui
-import React from "react";
-import { useNavigate } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { useNavigate, useSearchParams, useParams } from "react-router-dom";
 import {
   FormControl,
   FormHelperText,
@@ -34,11 +34,45 @@ const PageWrapper = styled(Page)(({ theme }) => ({
 const CategoryForm = () => {
   const queryClient = useQueryClient();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
+  const isEdit = JSON.parse(searchParams.get("isEdit"));
+  console.log(isEdit);
+  const { categoryId } = useParams();
+  const [Loading, setLoading] = useState(false);
+  const [category, setCategory] = useState({
+    name: "",
+  });
+
+  useEffect(() => {
+    const getCategoryDetail = async () => {
+      try {
+        setLoading(true);
+        const categoryResponse = await categoryInstance.get(
+          `/show-category/${categoryId}`
+        );
+
+        setCategory({ name: categoryResponse.data.data.name });
+        setLoading(false);
+      } catch (error) {
+        console.log(error.message);
+        setLoading(false);
+      }
+    };
+
+    if (categoryId) {
+      getCategoryDetail();
+    }
+  }, [categoryId]);
 
   const handleAddCategory = useMutation(
     async (values) => {
       console.log(values);
-      await categoryInstance.post("/add-category", {
+      const requestMethod =
+        isEdit === true ? categoryInstance.put : categoryInstance.post;
+      const requestURL =
+        isEdit === true ? `/update-category/${categoryId}` : "/add-category";
+
+      await requestMethod(requestURL, {
         name: values.name,
       });
     },
@@ -57,12 +91,12 @@ const CategoryForm = () => {
     <PageWrapper title="Categories">
       <Box marginBottom={3}>
         <Typography variant="h4" gutterBottom>
-          Add Category
+          {isEdit === true ? `Add Category` : `Edit Category`}
         </Typography>
       </Box>
       <Formik
         initialValues={{
-          name: "",
+          name: category.name,
         }}
         validationSchema={Yup.object().shape({
           name: Yup.string().max(255).required("Name is required"),
@@ -114,8 +148,9 @@ const CategoryForm = () => {
                     size="large"
                     type="submit"
                     variant="contained"
+                    disabled={Loading}
                   >
-                    Add
+                    {isEdit === true ? `Add` : `Update`}
                   </LoadingButton>
                 </Box>
               </Grid>
