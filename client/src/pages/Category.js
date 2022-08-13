@@ -14,12 +14,16 @@ import {
   TableContainer,
 } from "@mui/material";
 //import { styled } from "@mui/material/styles";
+
+import { useQuery } from "react-query";
+
 // components
 import Page from "../components/Page";
 import Scrollbar from "../components/Scrollbar";
 import Iconify from "../components/Iconify";
 //import Label from "../components/Label";
 import { TableListHead, TableListToolbar } from "../sections/@dashboard/Table";
+import categoryInstance from "src/axios/categoryInstance";
 
 const TABLE_HEAD = [
   { id: "no", label: "No#", alignRight: false },
@@ -28,6 +32,12 @@ const TABLE_HEAD = [
 ];
 
 export default function Categories() {
+  const { data: categoryList, isLoading } = useQuery("categories", async () => {
+    const categoryResponse = await categoryInstance.get("/show-category");
+    console.log(categoryResponse);
+    return categoryResponse.data.data;
+  });
+
   return (
     <Page title="Categories">
       <Container>
@@ -56,23 +66,26 @@ export default function Categories() {
               <Table>
                 <TableListHead headLabel={TABLE_HEAD} />
                 <TableBody>
-                  <TableRow hover>
-                    <TableCell component="th" scope="row" padding="normal">
-                      <Typography variant="subtitle2" noWrap>
-                        1
-                      </Typography>
-                    </TableCell>
-                    <TableCell component="th" scope="row" padding="normal">
-                      <Typography variant="subtitle2" noWrap>
-                        Mobile
-                      </Typography>
-                    </TableCell>
-                    <TableCell component="th" scope="row" padding="normal">
-                      <Typography variant="subtitle2" noWrap>
-                        Date
-                      </Typography>
-                    </TableCell>
-                  </TableRow>
+                  {categoryList &&
+                    categoryList.map((category, index) => (
+                      <TableRow hover key={category._id}>
+                        <TableCell component="th" scope="row" padding="normal">
+                          <Typography variant="subtitle3" noWrap>
+                            {index + 1}
+                          </Typography>
+                        </TableCell>
+                        <TableCell component="th" scope="row" padding="normal">
+                          <Typography variant="subtitle3" noWrap>
+                            {category.name}
+                          </Typography>
+                        </TableCell>
+                        <TableCell component="th" scope="row" padding="normal">
+                          <Typography variant="subtitle3" noWrap>
+                            {new Date(category.createdAt).toDateString()}
+                          </Typography>
+                        </TableCell>
+                      </TableRow>
+                    ))}
                 </TableBody>
               </Table>
             </TableContainer>
