@@ -53,8 +53,10 @@ exports.deleteCategory = async (req, res) => {
       });
     }
 
+    const category = await Category.find({});
+
     return res.status(200).json({
-      data: "category deleted succesfully",
+      data: category
     });
   } catch (err) {
     console.log(err.message);

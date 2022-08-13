@@ -13,7 +13,11 @@ import Iconify from "../../../components/Iconify";
 
 // ----------------------------------------------------------------------
 
-export default function TableActionMenu({ categoryId }) {
+export default function TableActionMenu({
+  categoryId,
+  setOpenDeleteModal,
+  setDeleteCategoryId,
+}) {
   const ref = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
 
@@ -46,7 +50,14 @@ export default function TableActionMenu({ categoryId }) {
             primaryTypographyProps={{ variant: "body2" }}
           />
         </MenuItem>
-        <MenuItem sx={{ color: "text.secondary" }}>
+        <MenuItem
+          sx={{ color: "text.secondary" }}
+          onClick={() => {
+            setOpenDeleteModal(true);
+            setIsOpen(false);
+            setDeleteCategoryId(categoryId);
+          }}
+        >
           <ListItemIcon>
             <Iconify icon="eva:trash-2-outline" width={24} height={24} />
           </ListItemIcon>
