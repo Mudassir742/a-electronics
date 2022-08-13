@@ -111,8 +111,8 @@ export default function Products() {
                 <Table>
                   <TableListHead headLabel={TABLE_HEAD} />
                   <TableBody>
-                    {/* {productList.map((product, index) => (
-                      <TableRow hover key={category._id}>
+                    {productList.map((product, index) => (
+                      <TableRow hover key={product._id}>
                         <TableCell component="th" scope="row" padding="normal">
                           <Typography variant="subtitle3" noWrap>
                             {index + 1}
@@ -120,28 +120,38 @@ export default function Products() {
                         </TableCell>
                         <TableCell component="th" scope="row" padding="normal">
                           <Typography variant="subtitle3" noWrap>
-                            {category.name}
+                            {product.name}
                           </Typography>
                         </TableCell>
                         <TableCell component="th" scope="row" padding="normal">
                           <Typography variant="subtitle3" noWrap>
-                            {new Date(category.createdAt).toDateString()}
+                            {product?.categoryId.name}
                           </Typography>
                         </TableCell>
                         <TableCell component="th" scope="row" padding="normal">
                           <Typography variant="subtitle3" noWrap>
-                            {new Date(category.updatedAt).toDateString()}
+                            {product.price} $
+                          </Typography>
+                        </TableCell>
+                        <TableCell component="th" scope="row" padding="normal">
+                          <Typography variant="subtitle3" noWrap>
+                            {product.model}
+                          </Typography>
+                        </TableCell>
+                        <TableCell component="th" scope="row" padding="normal">
+                          <Typography variant="subtitle3" noWrap>
+                            {product.quantity}
                           </Typography>
                         </TableCell>
                         <TableCell component="th" scope="row" padding="normal">
                           <TableActionMenu
-                            categoryId={category._id}
+                            categoryId={product._id}
                             setOpenDeleteModal={setOpenDeleteModal}
-                            setDeleteCategoryId={setDeleteCategoryId}
+                            setDeleteProductId={setDeleteProductId}
                           />
                         </TableCell>
                       </TableRow>
-                    ))} */}
+                    ))}
                   </TableBody>
                 </Table>
               </TableContainer>
