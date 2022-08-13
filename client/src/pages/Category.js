@@ -22,13 +22,19 @@ import Page from "../components/Page";
 import Scrollbar from "../components/Scrollbar";
 import Iconify from "../components/Iconify";
 //import Label from "../components/Label";
-import { TableListHead, TableListToolbar } from "../sections/@dashboard/Table";
+import {
+  TableListHead,
+  TableListToolbar,
+  TableActionMenu,
+} from "../sections/@dashboard/Table";
 import categoryInstance from "src/axios/categoryInstance";
 
 const TABLE_HEAD = [
   { id: "no", label: "No#", alignRight: false },
   { id: "name", label: "Name", alignRight: false },
-  { id: "date", label: "Created At", alignRight: false },
+  { id: "add", label: "Created At", alignRight: false },
+  { id: "update", label: "Updated At", alignRight: false },
+  { id: "", alignRight: true },
 ];
 
 export default function Categories() {
@@ -83,6 +89,14 @@ export default function Categories() {
                           <Typography variant="subtitle3" noWrap>
                             {new Date(category.createdAt).toDateString()}
                           </Typography>
+                        </TableCell>
+                        <TableCell component="th" scope="row" padding="normal">
+                          <Typography variant="subtitle3" noWrap>
+                            {new Date(category.updatedAt).toDateString()}
+                          </Typography>
+                        </TableCell>
+                        <TableCell component="th" scope="row" padding="normal">
+                          <TableActionMenu />
                         </TableCell>
                       </TableRow>
                     ))}
