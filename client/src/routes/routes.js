@@ -7,7 +7,7 @@ import NotFound from "../pages/Page404";
 import DashboardApp from "../pages/DashboardApp";
 import Category from "src/pages/Category";
 import CategoryForm from "src/components/forms/CategoryForm";
-
+import Products from "src/pages/Product";
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -35,6 +35,10 @@ export default function Router() {
         {
           path: "categories/category-form/:categoryId",
           element: <CategoryForm />,
+        },
+        {
+          path: "products",
+          element: <Products />,
         },
       ],
     },

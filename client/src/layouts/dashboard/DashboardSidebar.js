@@ -3,7 +3,7 @@ import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 // material
 import { styled } from "@mui/material/styles";
-import { Box, Drawer,Typography } from "@mui/material";
+import { Box, Drawer, Typography } from "@mui/material";
 // hooks
 import useResponsive from "../../hooks/useResponsive";
 // component
@@ -54,7 +54,9 @@ export default function DashboardSidebar({ isOpenSidebar, onCloseSidebar }) {
       }}
     >
       <Box sx={{ px: 2.5, py: 3, display: "inline-flex" }}>
-        <Typography variant="h5" color="rgb(126,87,194)">Hi-task</Typography> 
+        <Typography variant="h5" color="rgb(126,87,194)">
+          A-Electronics
+        </Typography>
       </Box>
 
       <NavSection navConfig={navConfig} />

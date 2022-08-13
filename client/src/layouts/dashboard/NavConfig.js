@@ -15,7 +15,11 @@ const navConfig = [
     title: "Category",
     path: "/dashboard/categories",
     icon: getIcon("ic:round-category"),
-  }
+  },
+  {
+    title: "Product",
+    path: "/dashboard/products",
+    icon: getIcon("emojione-monotone:shopping-bags"),
+  },
 ];
-
 export default navConfig;
