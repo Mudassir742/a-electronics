@@ -45,6 +45,10 @@ export default function Router() {
           path: "products/product-form",
           element: <ProductForm />,
         },
+        {
+          path: "products/product-form/:productId",
+          element: <ProductForm />,
+        },
       ],
     },
     {

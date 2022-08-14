@@ -133,6 +133,7 @@ export default function Categories() {
                         <TableCell component="th" scope="row" padding="normal">
                           <TableActionMenu
                             categoryId={category._id}
+                            itemType="category"
                             setOpenDeleteModal={setOpenDeleteModal}
                             setDeleteCategoryId={setDeleteCategoryId}
                           />

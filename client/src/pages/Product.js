@@ -146,8 +146,9 @@ export default function Products() {
                         <TableCell component="th" scope="row" padding="normal">
                           <TableActionMenu
                             categoryId={product._id}
+                            itemType="product"
                             setOpenDeleteModal={setOpenDeleteModal}
-                            setDeleteProductId={setDeleteProductId}
+                            setDeleteCategoryId={setDeleteProductId}
                           />
                         </TableCell>
                       </TableRow>

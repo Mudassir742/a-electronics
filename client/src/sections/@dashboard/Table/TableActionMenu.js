@@ -15,6 +15,7 @@ import Iconify from "../../../components/Iconify";
 
 export default function TableActionMenu({
   categoryId,
+  itemType,
   setOpenDeleteModal,
   setDeleteCategoryId,
 }) {
@@ -39,7 +40,11 @@ export default function TableActionMenu({
       >
         <MenuItem
           component={RouterLink}
-          to={`/dashboard/categories/category-form/${categoryId}?isEdit=true`}
+          to={
+            itemType === "category"
+              ? `/dashboard/categories/category-form/${categoryId}?isEdit=true`
+              : `/dashboard/products/product-form/${categoryId}?isEdit=true`
+          }
           sx={{ color: "text.secondary" }}
         >
           <ListItemIcon>
