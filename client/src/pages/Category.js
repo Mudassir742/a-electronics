@@ -47,7 +47,6 @@ export default function Categories() {
     "categories",
     async () => {
       const categoryResponse = await categoryInstance.get("/show-category");
-
       return categoryResponse.data.data;
     }
   );

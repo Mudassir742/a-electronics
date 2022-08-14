@@ -50,7 +50,12 @@ exports.deleteProduct = async (req, res) => {
       return res.status(422).json({ error: "Unable to delete product" });
     }
 
-    return res.status(200).json({ data: "product deleted successfully" });
+    const product = await Product.find({}).populate({
+      path: "categoryId",
+      select: "name _id",
+    });
+
+    return res.status(200).json({ data: product, message: "product deleted" });
   } catch (err) {
     console.log(err.message);
     return res

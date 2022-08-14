@@ -50,40 +50,39 @@ export default function Products() {
     "products",
     async () => {
       const productResponse = await productInstance.get("/show-product");
-      console.log(productResponse);
       return productResponse.data.data;
     }
   );
 
-  //   const handleDeleteCategory = useMutation(
-  //     async () => {
-  //       const categoryResponse = await categoryInstance.delete(
-  //         `/delete-category/${deleteProductId}`
-  //       );
-  //       setDeleteCategoryId("");
-  //       return categoryResponse.data.data;
-  //     },
-  //     {
-  //       onSuccess: (data) => {
-  //         queryClient.setQueryData("categories", data);
-  //         setOpenDeleteModal(false);
-  //       },
-  //       onError: (error) => {
-  //         console.log(error);
-  //         setOpenDeleteModal(false);
-  //       },
-  //     }
-  //   );
+  const handleDeleteProduct = useMutation(
+    async () => {
+      const productResponse = await productInstance.delete(
+        `/delete-product/${deleteProductId}`
+      );
+      setDeleteProductId("");
+      return productResponse.data.data;
+    },
+    {
+      onSuccess: (data) => {
+        queryClient.setQueryData("products", data);
+        setOpenDeleteModal(false);
+      },
+      onError: (error) => {
+        console.log(error);
+        setOpenDeleteModal(false);
+      },
+    }
+  );
 
   return (
     <>
-      {/* <DeleteModal
-        title="Category"
-        description="Are you sure you want yo delete this category?"
+      <DeleteModal
+        title="Product"
+        description="Are you sure you want yo delete this product?"
         open={openDeleteModal}
         setOpen={setOpenDeleteModal}
-        action={handleDeleteCategory}
-      /> */}
+        action={handleDeleteProduct}
+      />
       <Page title="Categories">
         <Container>
           <Stack
@@ -111,7 +110,7 @@ export default function Products() {
                 <Table>
                   <TableListHead headLabel={TABLE_HEAD} />
                   <TableBody>
-                    {productList.map((product, index) => (
+                    {productList?.map((product, index) => (
                       <TableRow hover key={product._id}>
                         <TableCell component="th" scope="row" padding="normal">
                           <Typography variant="subtitle3" noWrap>
