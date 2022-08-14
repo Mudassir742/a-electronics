@@ -14,7 +14,7 @@ import {
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import { useMutation ,useQuery} from "react-query";
+import { useMutation, useQuery } from "react-query";
 
 import Page from "../Page";
 
@@ -49,10 +49,13 @@ const ProductForm = () => {
     description: "",
   });
 
-  const {data:categoryList=[],isLoading} = useQuery("categories",async()=>{
-    const categoryResponse = await categoryInstance.get("/show-category")
-    return categoryResponse.data.data
-  })
+  const { data: categoryList = [], isLoading } = useQuery(
+    "categories",
+    async () => {
+      const categoryResponse = await categoryInstance.get("/show-category");
+      return categoryResponse.data.data;
+    }
+  );
 
   useEffect(() => {
     const getProductDetail = async () => {
@@ -184,7 +187,11 @@ const ProductForm = () => {
                     label="Category"
                     onChange={handleChange}
                   >
-                    <MenuItem value={"N/A"}>N/A</MenuItem>
+                    {categoryList.map((category) => (
+                      <MenuItem value={category._id} key={category._id}>
+                        {category.name}
+                      </MenuItem>
+                    ))}
                   </Select>
                   {!values.categoryId && touched.name && errors.name && (
                     <FormHelperText
@@ -197,6 +204,116 @@ const ProductForm = () => {
                 </FormControl>
               </Grid>
 
+              <Grid item xs={6}>
+                <FormControl
+                  fullWidth
+                  error={Boolean(touched.price && errors.price)}
+                >
+                  <InputLabel htmlFor="category-price">Price</InputLabel>
+                  <OutlinedInput
+                    id="category-price"
+                    type="text"
+                    value={values.price}
+                    name="price"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    label="Price"
+                    inputProps={{}}
+                  />
+                  {touched.price && errors.price && (
+                    <FormHelperText
+                      error
+                      id="standard-weight-helper-text-title"
+                    >
+                      {errors.price}
+                    </FormHelperText>
+                  )}
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={6}>
+                <FormControl
+                  fullWidth
+                  error={Boolean(touched.model && errors.model)}
+                >
+                  <InputLabel htmlFor="category-model">Model</InputLabel>
+                  <OutlinedInput
+                    id="category-model"
+                    type="text"
+                    value={values.model}
+                    name="model"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    label="Model"
+                    inputProps={{}}
+                  />
+                  {touched.model && errors.model && (
+                    <FormHelperText
+                      error
+                      id="standard-weight-helper-text-title"
+                    >
+                      {errors.model}
+                    </FormHelperText>
+                  )}
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={6}>
+                <FormControl
+                  fullWidth
+                  error={Boolean(touched.quantity && errors.quantity)}
+                >
+                  <InputLabel htmlFor="category-quantity">Quantity</InputLabel>
+                  <OutlinedInput
+                    id="category-quantity"
+                    type="text"
+                    value={values.quantity}
+                    name="quantity"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    label="Quantity"
+                    inputProps={{}}
+                  />
+                  {touched.quantity && errors.quantity && (
+                    <FormHelperText
+                      error
+                      id="standard-weight-helper-text-title"
+                    >
+                      {errors.quantity}
+                    </FormHelperText>
+                  )}
+                </FormControl>
+              </Grid>
+
+              <Grid item xs={6}>
+                <FormControl
+                  fullWidth
+                  error={Boolean(touched.description && errors.description)}
+                >
+                  <InputLabel htmlFor="category-description">
+                    Description
+                  </InputLabel>
+                  <OutlinedInput
+                    id="category-description"
+                    type="text"
+                    value={values.description}
+                    name="description"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    label="Description"
+                    inputProps={{}}
+                  />
+                  {touched.description && errors.description && (
+                    <FormHelperText
+                      error
+                      id="standard-weight-helper-text-title"
+                    >
+                      {errors.description}
+                    </FormHelperText>
+                  )}
+                </FormControl>
+              </Grid>
+
               <Grid item xs={12}>
                 <Box sx={{ mt: 2, position: "relative" }}>
                   <LoadingButton
@@ -204,7 +321,7 @@ const ProductForm = () => {
                     size="large"
                     type="submit"
                     variant="contained"
-                    disabled={Loading}
+                    disabled={Loading || isLoading}
                   >
                     {isEdit === true ? `Update` : `Add`}
                   </LoadingButton>
