@@ -98,7 +98,7 @@ export default function Products() {
             <Button
               variant="contained"
               component={RouterLink}
-              to="/dashboard/categories/category-form?isEdit=false"
+              to="/dashboard/products/product-form?isEdit=false"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
               New Product

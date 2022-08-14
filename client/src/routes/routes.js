@@ -8,6 +8,7 @@ import DashboardApp from "../pages/DashboardApp";
 import Category from "src/pages/Category";
 import CategoryForm from "src/components/forms/CategoryForm";
 import Products from "src/pages/Product";
+import ProductForm from "src/components/forms/ProductForm";
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -39,6 +40,10 @@ export default function Router() {
         {
           path: "products",
           element: <Products />,
+        },
+        {
+          path: "products/product-form",
+          element: <ProductForm />,
         },
       ],
     },
