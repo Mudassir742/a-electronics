@@ -65,7 +65,14 @@ const ProductForm = () => {
           `/show-product/${productId}`
         );
 
-        setProduct({ name: productResponse.data.data.name });
+        setProduct({
+          name: productResponse.data.data.name,
+          categoryId: productResponse.data.data.categoryId,
+          price: productResponse.data.data.price,
+          model: productResponse.data.data.model,
+          quantity: productResponse.data.data.quantity,
+          description: productResponse.data.data.description,
+        });
         setLoading(false);
       } catch (error) {
         console.log(error.message);
