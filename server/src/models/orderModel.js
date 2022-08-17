@@ -8,8 +8,8 @@ const orderSchema = new mongoose.Schema(
     },
     orderStatus: {
       type: String,
-      enum: ["pending", "placed", "packing", "dispatched", "delivered"],
-      default: "pending",
+      enum: ["0 pending", "1 placed", "2 packing", "3 dispatched", "4 delivered"],
+      default: "0 pending",
     },
     deliveryDate: {
       type: Date,
