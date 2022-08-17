@@ -23,7 +23,7 @@ exports.addOrder = async (req, res) => {
   try {
     const { amount, customerId, items } = req.body;
 
-    if (!amount || !items.length) {
+    if (!amount || !customerId || !items.length) {
       return res.status(400).json({ error: "bad request" });
     }
 
@@ -45,6 +45,30 @@ exports.addOrder = async (req, res) => {
     await OrderItem.insertMany(orderedItems);
 
     return res.status(200).json({ data: "order is placed!" });
+  } catch (error) {
+    console.log(error.message);
+    return res
+      .status(500)
+      .json({ error: "Unexpected server error while getting orders" });
+  }
+};
+
+exports.getCustomerOrder = async (req, res) => {
+  try {
+    const { customerId } = req.params;
+
+    if (!customerId) {
+      return res.status(400).json({ error: "bad request" });
+    }
+
+    const orders = await Order.find({ customerId: customerId })
+      .populate({
+        path: "customerId",
+        select: ["firstName", "lastName", "email"],
+      })
+      .populate({ path: "items" });
+
+    return res.status(200).json({ data: orders });
   } catch (error) {
     console.log(error.message);
     return res
