@@ -9,7 +9,13 @@ const orderSchema = new mongoose.Schema(
     },
     items: {
       type: Array,
-      ref: "products",
+      productId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "products",
+      },
+      quantity:{
+        type:'String'
+      }
     },
     orderStatus: {
       type: String,
