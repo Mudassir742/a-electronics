@@ -27,4 +27,10 @@ const orderSchema = new mongoose.Schema(
   }
 );
 
+orderSchema.virtual("items", {
+  ref: "orderItems",
+  foreignField: "orderId",
+  localField: "_id",
+});
+
 module.exports = mongoose.model("orders", orderSchema);

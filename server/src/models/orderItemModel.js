@@ -34,9 +34,14 @@ const orderItemSchema = mongoose.Schema(
       type: String,
     },
   },
-
   {
     timestamps: true,
+    toJSON: {
+      virtuals: true,
+    },
+    toObject: {
+      virtuals: true,
+    },
   }
 );
 
