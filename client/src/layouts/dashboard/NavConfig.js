@@ -21,5 +21,10 @@ const navConfig = [
     path: "/dashboard/products",
     icon: getIcon("emojione-monotone:shopping-bags"),
   },
+  {
+    title: "Order",
+    path: "/dashboard/orders",
+    icon: getIcon("mdi:order-bool-descending-variant"),
+  },
 ];
 export default navConfig;

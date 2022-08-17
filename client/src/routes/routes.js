@@ -9,6 +9,7 @@ import Category from "src/pages/Category";
 import CategoryForm from "src/components/forms/CategoryForm";
 import Products from "src/pages/Product";
 import ProductForm from "src/components/forms/ProductForm";
+import Orders from "src/pages/Order";
 // ----------------------------------------------------------------------
 
 export default function Router() {
@@ -48,6 +49,10 @@ export default function Router() {
         {
           path: "products/product-form/:productId",
           element: <ProductForm />,
+        },
+        {
+          path: "orders",
+          element: <Orders />,
         },
       ],
     },
