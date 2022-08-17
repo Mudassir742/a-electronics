@@ -22,10 +22,7 @@ import Page from "../components/Page";
 import Scrollbar from "../components/Scrollbar";
 import Iconify from "../components/Iconify";
 //import Label from "../components/Label";
-import {
-  TableListHead,
-  TableListToolbar
-} from "../sections/@dashboard/Table";
+import { TableListHead, TableListToolbar } from "../sections/@dashboard/Table";
 import orderInstance from "src/axios/orderInstance";
 
 const TABLE_HEAD = [
@@ -35,39 +32,36 @@ const TABLE_HEAD = [
   { id: "status", label: "Status", alignRight: false },
   { id: "amount", label: "Amount", alignRight: false },
   { id: "date", label: "Expected Delivery", alignRight: false },
-  { id: "location", label: "City/State", alignRight: false }
+  { id: "location", label: "City/State", alignRight: false },
 ];
 
 export default function Orders() {
   const queryClient = useQueryClient();
 
-//   const { data: categoryList = [], isLoading } = useQuery(
-//     "categories",
-//     async () => {
-//       const categoryResponse = await categoryInstance.get("/show-category");
-//       return categoryResponse.data.data;
-//     }
-//   );
+  const { data: orderList = [], isLoading } = useQuery("orders", async () => {
+    const orderResponse = await orderInstance.get("/get-order");
+    return orderResponse.data.data;
+  });
 
-//   const handleDeleteCategory = useMutation(
-//     async () => {
-//       const categoryResponse = await categoryInstance.delete(
-//         `/delete-category/${deleteCategoryId}`
-//       );
-//       setDeleteCategoryId("");
-//       return categoryResponse.data.data;
-//     },
-//     {
-//       onSuccess: (data) => {
-//         queryClient.setQueryData("categories", data);
-//         setOpenDeleteModal(false);
-//       },
-//       onError: (error) => {
-//         console.log(error);
-//         setOpenDeleteModal(false);
-//       },
-//     }
-//   );
+  //   const handleDeleteCategory = useMutation(
+  //     async () => {
+  //       const categoryResponse = await categoryInstance.delete(
+  //         `/delete-category/${deleteCategoryId}`
+  //       );
+  //       setDeleteCategoryId("");
+  //       return categoryResponse.data.data;
+  //     },
+  //     {
+  //       onSuccess: (data) => {
+  //         queryClient.setQueryData("categories", data);
+  //         setOpenDeleteModal(false);
+  //       },
+  //       onError: (error) => {
+  //         console.log(error);
+  //         setOpenDeleteModal(false);
+  //       },
+  //     }
+  //   );
 
   return (
     <>
@@ -90,8 +84,8 @@ export default function Orders() {
                 <Table>
                   <TableListHead headLabel={TABLE_HEAD} />
                   <TableBody>
-                    {/* {categoryList.map((category, index) => (
-                      <TableRow hover key={category._id}>
+                    {orderList.map((order, index) => (
+                      <TableRow hover key={order._id}>
                         <TableCell component="th" scope="row" padding="normal">
                           <Typography variant="subtitle3" noWrap>
                             {index + 1}
@@ -99,21 +93,36 @@ export default function Orders() {
                         </TableCell>
                         <TableCell component="th" scope="row" padding="normal">
                           <Typography variant="subtitle3" noWrap>
-                            {category.name}
+                            {`${order?.customerId.firstName} ${order?.customerId.lastName}`}
                           </Typography>
                         </TableCell>
                         <TableCell component="th" scope="row" padding="normal">
                           <Typography variant="subtitle3" noWrap>
-                            {new Date(category.createdAt).toDateString()}
+                            {order?.paymentType}
                           </Typography>
                         </TableCell>
                         <TableCell component="th" scope="row" padding="normal">
                           <Typography variant="subtitle3" noWrap>
-                            {new Date(category.updatedAt).toDateString()}
+                            {order?.orderStatus}
+                          </Typography>
+                        </TableCell>
+                        <TableCell component="th" scope="row" padding="normal">
+                          <Typography variant="subtitle3" noWrap>
+                            {order?.amount}
+                          </Typography>
+                        </TableCell>
+                        <TableCell component="th" scope="row" padding="normal">
+                          <Typography variant="subtitle3" noWrap>
+                            {order?.deliveryDate}
+                          </Typography>
+                        </TableCell>
+                        <TableCell component="th" scope="row" padding="normal">
+                          <Typography variant="subtitle3" noWrap>
+                            {order?.ip}
                           </Typography>
                         </TableCell>
                       </TableRow>
-                    ))} */}
+                    ))}
                   </TableBody>
                 </Table>
               </TableContainer>

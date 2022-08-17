@@ -8,11 +8,16 @@ const orderSchema = new mongoose.Schema(
     },
     orderStatus: {
       type: String,
-      enum: ["pending", "placed", "packing", "shipped", "delivered"],
+      enum: ["pending", "placed", "packing", "dispatched", "delivered"],
       default: "pending",
     },
     deliveryDate: {
       type: Date,
+    },
+    paymentType: {
+      type: String,
+      enum: ["cash", "card"],
+      default: "cash",
     },
     amount: {
       type: String,
