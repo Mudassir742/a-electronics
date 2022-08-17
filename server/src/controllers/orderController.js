@@ -14,3 +14,16 @@ exports.getOrders = async (req, res) => {
       .json({ error: "Unexpected server error while getting orders" });
   }
 };
+
+exports.addOrder = async (req, res) => {
+  try {
+    
+
+
+  } catch (error) {
+    console.log(error.message);
+    return res
+      .status(500)
+      .json({ error: "Unexpected server error while getting orders" });
+  }
+};

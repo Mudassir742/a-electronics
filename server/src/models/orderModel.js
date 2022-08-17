@@ -4,18 +4,7 @@ const orderSchema = new mongoose.Schema(
   {
     customerId: {
       type: mongoose.Schema.Types.ObjectId,
-      required: true,
       ref: "users",
-    },
-    items: {
-      type: Array,
-      productId: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "products",
-      },
-      quantity:{
-        type:'String'
-      }
     },
     orderStatus: {
       type: String,
@@ -26,7 +15,7 @@ const orderSchema = new mongoose.Schema(
       type: Date,
     },
     amount: {
-      type: "String",
+      type: String,
       required: [true, "order amount is missing"],
     },
     ip: {
