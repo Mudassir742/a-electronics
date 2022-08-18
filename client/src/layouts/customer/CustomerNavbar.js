@@ -1,14 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 
-const RootStyle = styled("header")(({ theme }) => ({
+const RootStyle = styled("header")(({ theme, stickey }) => ({
   width: "100vw",
   maxWidth: "100%",
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  padding: "2rem 3rem"
+  position: "fixed",
+  top: 0,
+  left: 0,
+  padding: stickey ? "1.5rem 5rem" : "2.2rem 6rem",
+  backgroundColor: "#F9FAFB",
+  transition: "top,left,padding .6s",
+  zIndex: 1000,
 }));
 
 const Header = styled("div")(({ theme }) => ({
@@ -28,8 +34,17 @@ const NavItems = styled("nav")(({ theme }) => ({
 }));
 
 const CustomerNavbar = () => {
+  const [style, setStyle] = useState(false);
+
+  useEffect(() => {
+    window.addEventListener("scroll", () => {
+      if (window.scrollY > 0) setStyle(true);
+      else setStyle(false);
+    });
+  }, []);
+
   return (
-    <RootStyle>
+    <RootStyle stickey={style}>
       <Header>
         <h2>Logo</h2>
         <NavItems>
