@@ -12,7 +12,7 @@ const RootStyle = styled("header")(({ theme, stickey }) => ({
   top: 0,
   left: 0,
   padding: stickey ? "1.5rem 5rem" : "2.2rem 6rem",
-  backgroundColor: "#F9FAFB",
+  backgroundColor: "#43D4E8",
   transition: "top,left,padding .6s",
   zIndex: 1000,
 }));
@@ -46,7 +46,7 @@ const CustomerNavbar = () => {
   return (
     <RootStyle stickey={style}>
       <Header>
-        <h2>Logo</h2>
+        <h2 className="logo">Logo</h2>
         <NavItems>
           <NavLink to="/app/home" className="link">
             Home

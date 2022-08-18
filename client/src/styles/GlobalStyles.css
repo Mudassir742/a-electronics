@@ -1,8 +1,15 @@
-@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600&family=Permanent+Marker&display=swap');
 
 /*-------------------------Header--------------------------------------------*/
 .customerLayout {
     font-family: 'Manrope', sans-serif;
+}
+
+.logo {
+    font-family: 'Permanent Marker', cursive;
+    color: white;
+    font-size: 2rem;
 }
 
 .link {
@@ -13,7 +20,33 @@
 }
 
 .active, .link:hover {
-    color: #181818;
+    color: white;
     transition: color .3s ease-out;
     /* border-bottom: 1px solid #181818; */
+}
+
+.bubble {
+    width: 180px;
+    height: 180px;
+    border-radius: 90px;
+    background-color: #FA5E1F;
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 1;
+}
+
+.bubble-white {
+    background-color: white;
+    width: 220px;
+    height: 220px;
+    border-radius: 110px;
+    right: -40%;
+    top: 0;
+}
+
+.image {
+    position: absolute;
+    z-index: 1000;
+    width: 700px
 }
