@@ -6,9 +6,12 @@ import BannerImage from "./Macbook.png";
 const BannerContainer = styled("section")(({ theme }) => ({
   height: "75vh",
   backgroundColor: "#43D4E8",
-  padding: "8rem 0 0 0",
+  padding: "8rem 0 0 5rem",
   display: "flex",
   justifyContent: "center",
+  [theme.breakpoints.down(780)]: {
+    height: "auto",
+  },
 }));
 
 const BannerStyle = styled("section")(({ theme }) => ({
@@ -16,6 +19,9 @@ const BannerStyle = styled("section")(({ theme }) => ({
   padding: "1rem",
   maxWidth: "1200px",
   overflow: "hidden",
+  [theme.breakpoints.down(780)]: {
+    marginBottom: "3rem",
+  },
 }));
 const OfferHeading = styled(Typography)(({ theme }) => ({
   fontSize: "2.5rem",
@@ -29,6 +35,9 @@ const OfferDetail = styled(Typography)(({ theme }) => ({
 }));
 const InfoWrapper = styled(Box)(({ theme }) => ({
   width: "75%",
+  [theme.breakpoints.down("980")]: {
+    width: "100%",
+  },
 }));
 const ShopButton = styled(Button)(({ theme }) => ({
   background: "#FA5E1F",
@@ -44,18 +53,66 @@ const ImageBackground = styled(Box)(({ theme }) => ({
   border: "2px solid white",
   width: "420px",
   height: "420px",
-  borderRadius: "210%",
+  borderRadius: "210px",
+  marginRight:'5rem',
   display: "flex",
   alignItems: "center",
   position: "relative",
+  [theme.breakpoints.down(890)]: {
+    width:'350px',
+    height:'350px',
+    borderRadius:'175px',
+  },
+  [theme.breakpoints.down(760)]: {
+    width:'300px',
+    height:'300px',
+    borderRadius:'150px',
+  },
+  [theme.breakpoints.down(600)]: {
+    marginTop:'4rem',
+    width:'350px',
+    height:'350px',
+    borderRadius:'175px',
+  },
+  [theme.breakpoints.down(470)]: {
+    marginTop:'4rem',
+    width:'300px',
+    height:'300px',
+    borderRadius:'150px',
+  },
+}));
+
+const BubbleWhite = styled(Box)(({ theme }) => ({
+  backgroundColor: "white",
+  width: "220px",
+  height: "220px",
+  borderRadius: "110px",
+  position: "absolute",
+  right: "-40%",
+  top: 0,
+}));
+const BubbleOrange = styled(Box)(({ theme }) => ({
+  backgroundColor: "#FA5E1F",
+  width: "180px",
+  height: "180px",
+  borderRadius: "90px",
+  position: "absolute",
+  right: 0,
+  top: 0,
+  zIndex: 1,
+}));
+const Image = styled("img")(({ theme }) => ({
+  position: "absolute",
+  width:'500px',
+  zIndex: 1000
 }));
 
 const Banner = () => {
   return (
     <BannerContainer>
       <BannerStyle>
-        <Grid container spacing={2}>
-          <Grid item md={6} alignItems="center" justifyContent="center">
+        <Grid container>
+          <Grid item sm={6} xs={12} alignItems="center" justifyContent="center">
             <InfoWrapper>
               <OfferHeading>Apple MacBook Air MQD32 Laptop</OfferHeading>
               <OfferDetail>
@@ -66,11 +123,11 @@ const Banner = () => {
             </InfoWrapper>
           </Grid>
 
-          <Grid item md={6}>
+          <Grid item sm={6} xs={12}>
             <ImageBackground>
-              <div className="bubble bubble-white"></div>
-              <div className="bubble"></div>
-              <img src={BannerImage} className="image" />
+              <BubbleOrange></BubbleOrange>
+              <BubbleWhite></BubbleWhite>
+              <Image src={BannerImage} />
             </ImageBackground>
           </Grid>
         </Grid>
