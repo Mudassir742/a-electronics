@@ -18,50 +18,53 @@ import {
 import { useQueryClient, useMutation, useQuery } from "react-query";
 
 // components
-import Page from "../components/Page";
-import Scrollbar from "../components/Scrollbar";
-import Iconify from "../components/Iconify";
+import Page from "src/components/Page";
+import Scrollbar from "src/components/Scrollbar";
+import Iconify from "src/components/Iconify";
 import DeleteModal from "src/components/modals/DeleteModal";
 //import Label from "../components/Label";
 import {
   TableListHead,
   TableListToolbar,
   TableActionMenu,
-} from "../sections/@dashboard/Table";
-import categoryInstance from "src/axios/categoryInstance";
+} from "src/sections/@dashboard/Table";
+
+import productInstance from "src/axios/productInstance";
 
 const TABLE_HEAD = [
   { id: "no", label: "No#", alignRight: false },
   { id: "name", label: "Name", alignRight: false },
-  { id: "add", label: "Created At", alignRight: false },
-  { id: "update", label: "Updated At", alignRight: false },
+  { id: "category", label: "Category", alignRight: false },
+  { id: "price", label: "Price", alignRight: false },
+  { id: "model", label: "Model", alignRight: false },
+  { id: "quantity", label: "Quantity", alignRight: false },
   { id: "", alignRight: true },
 ];
 
-export default function Categories() {
+export default function Products() {
   const queryClient = useQueryClient();
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
-  const [deleteCategoryId, setDeleteCategoryId] = useState("");
+  const [deleteProductId, setDeleteProductId] = useState("");
 
-  const { data: categoryList = [], isLoading } = useQuery(
-    "categories",
+  const { data: productList = [], isLoading } = useQuery(
+    "products",
     async () => {
-      const categoryResponse = await categoryInstance.get("/show-category");
-      return categoryResponse.data.data;
+      const productResponse = await productInstance.get("/show-product");
+      return productResponse.data.data;
     }
   );
 
-  const handleDeleteCategory = useMutation(
+  const handleDeleteProduct = useMutation(
     async () => {
-      const categoryResponse = await categoryInstance.delete(
-        `/delete-category/${deleteCategoryId}`
+      const productResponse = await productInstance.delete(
+        `/delete-product/${deleteProductId}`
       );
-      setDeleteCategoryId("");
-      return categoryResponse.data.data;
+      setDeleteProductId("");
+      return productResponse.data.data;
     },
     {
       onSuccess: (data) => {
-        queryClient.setQueryData("categories", data);
+        queryClient.setQueryData("products", data);
         setOpenDeleteModal(false);
       },
       onError: (error) => {
@@ -74,11 +77,11 @@ export default function Categories() {
   return (
     <>
       <DeleteModal
-        title="Category"
-        description="Are you sure you want yo delete this category?"
+        title="Product"
+        description="Are you sure you want yo delete this product?"
         open={openDeleteModal}
         setOpen={setOpenDeleteModal}
-        action={handleDeleteCategory}
+        action={handleDeleteProduct}
       />
       <Page title="Categories">
         <Container>
@@ -89,15 +92,15 @@ export default function Categories() {
             mb={5}
           >
             <Typography variant="h4" gutterBottom>
-              Categories
+              Products
             </Typography>
             <Button
               variant="contained"
               component={RouterLink}
-              to="/dashboard/categories/category-form?isEdit=false"
+              to="/dashboard/products/product-form?isEdit=false"
               startIcon={<Iconify icon="eva:plus-fill" />}
             >
-              New Category
+              New Product
             </Button>
           </Stack>
           <Card>
@@ -107,8 +110,8 @@ export default function Categories() {
                 <Table>
                   <TableListHead headLabel={TABLE_HEAD} />
                   <TableBody>
-                    {categoryList.map((category, index) => (
-                      <TableRow hover key={category._id}>
+                    {productList?.map((product, index) => (
+                      <TableRow hover key={product._id}>
                         <TableCell component="th" scope="row" padding="normal">
                           <Typography variant="subtitle3" noWrap>
                             {index + 1}
@@ -116,25 +119,35 @@ export default function Categories() {
                         </TableCell>
                         <TableCell component="th" scope="row" padding="normal">
                           <Typography variant="subtitle3" noWrap>
-                            {category.name}
+                            {product.name}
                           </Typography>
                         </TableCell>
                         <TableCell component="th" scope="row" padding="normal">
                           <Typography variant="subtitle3" noWrap>
-                            {new Date(category.createdAt).toDateString()}
+                            {product?.categoryId?.name}
                           </Typography>
                         </TableCell>
                         <TableCell component="th" scope="row" padding="normal">
                           <Typography variant="subtitle3" noWrap>
-                            {new Date(category.updatedAt).toDateString()}
+                            {product.price} $
+                          </Typography>
+                        </TableCell>
+                        <TableCell component="th" scope="row" padding="normal">
+                          <Typography variant="subtitle3" noWrap>
+                            {product.model}
+                          </Typography>
+                        </TableCell>
+                        <TableCell component="th" scope="row" padding="normal">
+                          <Typography variant="subtitle3" noWrap>
+                            {product.quantity}
                           </Typography>
                         </TableCell>
                         <TableCell component="th" scope="row" padding="normal">
                           <TableActionMenu
-                            categoryId={category._id}
-                            itemType="category"
+                            categoryId={product._id}
+                            itemType="product"
                             setOpenDeleteModal={setOpenDeleteModal}
-                            setDeleteCategoryId={setDeleteCategoryId}
+                            setDeleteCategoryId={setDeleteProductId}
                           />
                         </TableCell>
                       </TableRow>

@@ -20,11 +20,11 @@ import { styled } from "@mui/material/styles";
 import { useQueryClient, useMutation, useQuery } from "react-query";
 
 // components
-import Page from "../components/Page";
-import Scrollbar from "../components/Scrollbar";
-import Iconify from "../components/Iconify";
+import Page from "src/components/Page";
+import Scrollbar from "src/components/Scrollbar";
+import Iconify from "src/components/Iconify";
 //import Label from "../components/Label";
-import { TableListHead, TableListToolbar } from "../sections/@dashboard/Table";
+import { TableListHead, TableListToolbar } from "src/sections/@dashboard/Table";
 import orderInstance from "src/axios/orderInstance";
 
 const TABLE_HEAD = [

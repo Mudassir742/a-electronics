@@ -2,21 +2,25 @@ import React from "react";
 import { Navigate, useRoutes } from "react-router-dom";
 // layouts
 import DashboardLayout from "../layouts/dashboard";
-//
+import CustomerLayout from "src/layouts/customer";
+//dashboard pages
 import NotFound from "../pages/Page404";
-import DashboardApp from "../pages/DashboardApp";
-import Category from "src/pages/Category";
+import DashboardApp from "../pages/dashboard/DashboardApp";
+import Category from "src/pages/dashboard/Category";
+import Products from "src/pages/dashboard/Product";
+import Orders from "src/pages/dashboard/Order";
 import CategoryForm from "src/components/forms/CategoryForm";
-import Products from "src/pages/Product";
 import ProductForm from "src/components/forms/ProductForm";
-import Orders from "src/pages/Order";
+//customer pages
+import Home from "src/pages/customer/Home";
+
 // ----------------------------------------------------------------------
 
 export default function Router() {
   return useRoutes([
     {
       path: "/",
-      element: <Navigate to="/dashboard/main" replace />,
+      element: <Navigate to="/app/home" replace />,
     },
     {
       path: "/dashboard",
@@ -53,6 +57,16 @@ export default function Router() {
         {
           path: "orders",
           element: <Orders />,
+        },
+      ],
+    },
+    {
+      path: "/app",
+      element: <CustomerLayout />,
+      children: [
+        {
+          path: "home",
+          element: <Home />,
         },
       ],
     },
