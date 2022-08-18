@@ -4,11 +4,16 @@ import { Outlet } from "react-router-dom";
 //material
 import { styled } from "@mui/material/styles";
 
+import CustomerNavbar from "./CustomerNavbar";
+
+const RootStyle = styled("div")(({ theme }) => ({}));
+
 const CustomerLayout = () => {
   return (
-    <div>
+    <RootStyle className="customerLayout">
+      <CustomerNavbar />
       <Outlet />
-    </div>
+    </RootStyle>
   );
 };
 

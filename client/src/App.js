@@ -8,6 +8,7 @@ import ScrollToTop from "./components/ScrollToTop";
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
 
+import "./styles/GlobalStyles.css"
 // ----------------------------------------------------------------------
 
 const queryClient = new QueryClient();
