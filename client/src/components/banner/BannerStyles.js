@@ -7,6 +7,7 @@ export const BannerContainer = styled("section")(({ theme }) => ({
   padding: "9rem 2rem 0 2rem",
   display: "flex",
   justifyContent: "center",
+  backgroundColor: "#EFEEEA",
   [theme.breakpoints.down(901)]: {
     paddingTop: "8rem",
   },
@@ -21,7 +22,7 @@ export const BannerContent = styled(Grid)(({ theme }) => ({
   [theme.breakpoints.down(901)]: {
     flexDirection: "column-reverse",
     borderRadius: "8px",
-    boxShadow: "0px 2px 8px 0px rgba(46,46,46,0.4)",
+    //boxShadow: "0px 2px 8px 0px rgba(46,46,46,0.4)",
   },
 }));
 export const InfoWrapper = styled(Box)(({ theme }) => ({
