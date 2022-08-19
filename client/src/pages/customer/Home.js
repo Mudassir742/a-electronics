@@ -2,7 +2,7 @@ import React from "react";
 
 import { styled } from "@mui/material/styles";
 
-import Banner from "src/components/Banner";
+import Banner from "src/components/banner/Banner";
 
 const RootStyle = styled("section")(({ theme, stickey }) => ({
   
