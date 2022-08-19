@@ -4,7 +4,7 @@ import { styled } from "@mui/material/styles";
 export const BannerContainer = styled("section")(({ theme }) => ({
   height: "auto",
   marginBottom: "2rem",
-  padding: "9rem 2rem 0 2rem",
+  padding: "9rem 2rem 2rem 2rem",
   display: "flex",
   justifyContent: "center",
   backgroundColor: "#EFEEEA",

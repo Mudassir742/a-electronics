@@ -6,8 +6,10 @@ import CategoryCard from "./layout/CategoryCard";
 import CardImage from "./cardImage.jpg";
 
 const RootStyle = styled("div")(({ theme, stickey }) => ({
-  margin: "2rem 0",
-  padding:'2rem'
+  padding: "2rem",
+  width:'100vw',
+  maxWidth:'100%',
+  overflow:'hidden'
 }));
 const CategoryTitle = styled(Typography)(({ theme }) => ({
   width: "100%",
@@ -16,16 +18,13 @@ const CategoryTitle = styled(Typography)(({ theme }) => ({
 }));
 const CategoryDetail = styled(Grid)(({ theme }) => ({
   margin: "4rem 0",
-  maxWidth:'1350px',
-  width:'100%',
-  justifyContent:'space-between'
 }));
 
 const Categories = () => {
   return (
     <RootStyle>
       <CategoryTitle variant="h3">Exclusive Categories</CategoryTitle>
-      <CategoryDetail container>
+      <CategoryDetail container spacing={2}>
         <CategoryCard image={CardImage} />
         <CategoryCard image={CardImage} />
         <CategoryCard image={CardImage} />
