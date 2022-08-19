@@ -11,12 +11,12 @@ const RootStyle = styled("header")(({ theme, stickey }) => ({
   position: "fixed",
   top: 0,
   left: 0,
-  padding: stickey ? "1.5rem 5rem" : "2.2rem 6rem",
+  padding: stickey ? "1.4rem 5rem" : "2rem 6rem",
   backgroundColor: "#43D4E8",
   transition: "top,left,padding .6s",
   zIndex: 1000,
-  [theme.breakpoints.down(880)]: {
-    padding: stickey ? "1.1rem 4rem" : "1.6rem 5rem",
+  [theme.breakpoints.down(901)]: {
+    padding: stickey ? "1.1rem 2rem" : "1.4rem 3rem",
   },
 }));
 
