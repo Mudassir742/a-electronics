@@ -2,7 +2,7 @@ import { Typography, Grid, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 const CardWrapper = styled(Grid)(({ theme }) => ({
-    [theme.breakpoints.down(601)]: {
+    [theme.breakpoints.down(901)]: {
         marginBottom:'2rem'
       },
 }));
