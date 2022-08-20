@@ -21,7 +21,6 @@ export const BannerContent = styled(Grid)(({ theme }) => ({
   overflow: "hidden",
   [theme.breakpoints.down(901)]: {
     flexDirection: "column-reverse",
-    borderRadius: "8px",
     //boxShadow: "0px 2px 8px 0px rgba(46,46,46,0.4)",
   },
 }));
@@ -34,8 +33,8 @@ export const ItemInfo = styled(Grid)(({ theme }) => ({
   justifyContent: "center",
   background: "linear-gradient(to bottom,#E58E34 82%,#fff 4% ,#F6D4B1 14%)",
   [theme.breakpoints.down(901)]: {
-    padding: "1.5rem 0 1rem 1rem",
-    background: "white",
+    padding: "1.5rem 0 1rem 0",
+    background: "#EFEEEA",
     display: "block",
     borderTop: "20px solid #E58E34",
   },
