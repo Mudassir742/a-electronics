@@ -3,12 +3,12 @@ import { Typography, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import CategoryCard from "./layout/CategoryCard";
-import CardImage from "./cardImage.jpg";
-import deliveryImage from "./delivery.jpg";
-import solarImage from "./solarPannel.jpg";
-import productImage from "./allProducts.jpg";
-import phoneImage from "./phones.jpg";
-import laptopImage from "./cardLaptop2.jpg";
+import CardImage from "src/assets/cardImage.jpg";
+import deliveryImage from "src/assets/delivery.jpg";
+import solarImage from "src/assets/solarPannel.jpg";
+import productImage from "src/assets/allProducts.jpg";
+import phoneImage from "src/assets/phones.jpg";
+import laptopImage from "src/assets/cardLaptop2.jpg";
 
 const RootStyle = styled("div")(({ theme, stickey }) => ({
   padding: "2rem",

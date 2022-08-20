@@ -11,7 +11,7 @@ import {
   Image,
 } from "./BannerStyles";
 
-import BannerImage from "./electronics.png";
+import BannerImage from "src/assets/electronics.png";
 
 const Banner = () => {
   return (

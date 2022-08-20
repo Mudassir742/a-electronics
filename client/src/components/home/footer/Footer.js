@@ -19,13 +19,13 @@ const Footer = () => {
             <h3>Company</h3>
             <ul>
               <li>
-                <a href="#">About</a>
+                <a href="/">About</a>
               </li>
               <li>
-                <a href="#">Customers</a>
+                <a href="/">Customers</a>
               </li>
               <li>
-                <a href="#">Blog</a>
+                <a href="/">Blog</a>
               </li>
             </ul>
           </div>
@@ -36,7 +36,7 @@ const Footer = () => {
             <h3>Opportunity</h3>
             <ul>
               <li>
-                <a href="#">Jobs</a>
+                <a href="/">Jobs</a>
               </li>
             </ul>
           </div>
@@ -47,7 +47,7 @@ const Footer = () => {
             <h3>Sitemap</h3>
             <ul>
               <li>
-                <a href="#">HomePage</a>
+                <a href="/">HomePage</a>
               </li>
             </ul>
           </div>
@@ -58,13 +58,13 @@ const Footer = () => {
             <h3>Resources</h3>
             <ul>
               <li>
-                <a href="#">Support</a>
+                <a href="/">Support</a>
               </li>
               <li>
-                <a href="#">Contact</a>
+                <a href="/">Contact</a>
               </li>
               <li>
-                <a href="#">FAQ</a>
+                <a href="/">FAQ</a>
               </li>
             </ul>
           </div>

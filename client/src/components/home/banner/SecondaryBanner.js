@@ -1,7 +1,7 @@
 import { Typography, Box, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
-import BudsImage from "./GalaxyBuds.jpg";
+import BudsImage from "src/assets/GalaxyBuds.jpg";
 
 const RootStyle = styled(Box)(({ theme, stickey }) => ({
   padding: "1rem 0 2rem 2rem",
