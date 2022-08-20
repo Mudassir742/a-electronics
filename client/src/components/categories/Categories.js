@@ -4,12 +4,17 @@ import { styled } from "@mui/material/styles";
 
 import CategoryCard from "./layout/CategoryCard";
 import CardImage from "./cardImage.jpg";
+import deliveryImage from "./delivery.jpg";
+import solarImage from "./solarPannel.jpg";
+import productImage from "./allProducts.jpg";
+import phoneImage from "./phones.jpg";
+import laptopImage from "./cardLaptop2.jpg";
 
 const RootStyle = styled("div")(({ theme, stickey }) => ({
   padding: "2rem",
-  width:'100vw',
-  maxWidth:'100%',
-  overflow:'hidden'
+  width: "100vw",
+  maxWidth: "100%",
+  overflow: "hidden",
 }));
 const CategoryTitle = styled(Typography)(({ theme }) => ({
   width: "100%",
@@ -25,9 +30,36 @@ const Categories = () => {
     <RootStyle>
       <CategoryTitle variant="h3">Exclusive Categories</CategoryTitle>
       <CategoryDetail container spacing={2}>
-        <CategoryCard image={CardImage} />
-        <CategoryCard image={CardImage} />
-        <CategoryCard image={CardImage} />
+        <CategoryCard
+          image={CardImage}
+          heading="Weekly Deals"
+          info="Get great new deals each week."
+        />
+        <CategoryCard
+          image={deliveryImage}
+          heading="Ready-to-Ship"
+          info="need it soon?get it fast"
+        />
+        <CategoryCard
+          image={solarImage}
+          heading="Ruseable Energy"
+          info="Generate solar electricuty."
+        />
+        <CategoryCard
+          image={phoneImage}
+          heading="Latest Phones"
+          info="Buy latest phones now."
+        />
+        <CategoryCard
+          image={laptopImage}
+          heading="2-in-1 Laptops"
+          info="Laptops according to need."
+        />
+        <CategoryCard
+          image={productImage}
+          heading="All Products"
+          info="View all products now."
+        />
       </CategoryDetail>
     </RootStyle>
   );

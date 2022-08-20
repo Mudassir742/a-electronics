@@ -24,3 +24,9 @@
     transition: color .3s ease-out;
     /* border-bottom: 1px solid #181818; */
 }
+
+.cardWrapper:hover .cardButton{
+    border-bottom: 2px solid black;
+    transition: border .5s ease-out;
+    display: inline-block;
+}

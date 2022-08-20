@@ -21,6 +21,7 @@ const CardInfo = styled(Typography)(({ theme }) => ({
 }));
 const CardButton = styled(Typography)(({ theme }) => ({
   fontWeight: "bold",
+  paddingBottom:'.2rem',
 }));
 const ImageWrapper = styled(Box)(({ theme }) => ({
   width: "100%",
@@ -29,16 +30,18 @@ const ImageWrapper = styled(Box)(({ theme }) => ({
 }));
 const Image = styled("img")(({ theme }) => ({
   width: "85%",
+  maxWidth:'402px',
+  maxHeight:'272px'
 }));
 
-const CategoryCard = ({ image }) => {
+const CategoryCard = ({ image,heading,info }) => {
   return (
-    <CardWrapper item md={4} sm={6} xs={12}>
+    <CardWrapper className="cardWrapper" item md={4} sm={6} xs={12}>
       <CardContainer>
         <ContentWrapper>
-          <CardHeading variant="h4">Weekly Deals</CardHeading>
-          <CardInfo>Get Deals Each Week.</CardInfo>
-          <CardButton>Shop</CardButton>
+          <CardHeading variant="h4">{heading}</CardHeading>
+          <CardInfo>{info}</CardInfo>
+          <CardButton className="cardButton">Shop</CardButton>
         </ContentWrapper>
         <ImageWrapper>
           <Image src={image} alt="card" />
