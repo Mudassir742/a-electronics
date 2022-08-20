@@ -30,3 +30,219 @@
     transition: border .5s ease-out;
     display: inline-block;
 }
+
+/*-------------------------------FOOTER--------------------------------------*/
+.footer {
+    padding: 2rem 2rem 3rem 2rem;
+    background-color: #050704;
+}
+
+.footer-logo {
+    font-family: 'Permanent Marker', cursive;
+    margin-bottom: 1rem;
+}
+
+.footer-content {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: auto;
+    grid-template-areas: "footer-top footer-top footer-top""link-1 . link-2""link-3 . link-4";
+    column-gap: 10px;
+    row-gap: 20px;
+}
+
+.footer-top {
+    grid-area: footer-top;
+}
+
+.footer-link.one {
+    grid-area: link-1;
+}
+
+.footer-link.two {
+    grid-area: link-2;
+}
+
+.footer-link.three {
+    grid-area: link-3;
+}
+
+.footer-link.four {
+    grid-area: link-4;
+}
+
+.footer-link ul {
+    list-style: none;
+}
+
+.footer-link ul li a {
+    text-decoration: none;
+    display: inline-block;
+    margin-top: .8rem;
+    color: #999999;
+}
+
+.footer-content .footer-top h2 {
+    color: white;
+    margin: .5rem 0;
+}
+
+.footer-content h3 {
+    color: white;
+    letter-spacing: 1px;
+}
+
+.footer-content .footer-top p {
+    color: #999999;
+    font-size: 1.062rem;
+    letter-spacing: normal;
+    text-align: justify;
+}
+
+@media only screen and (min-width:480px) {
+
+    .footer {
+        padding: 1.2rem;
+    }
+
+    .footer-content .footer-top p {
+        font-size: 1.162rem;
+    }
+
+    .footer-link ul li a {
+        font-size: 1.1rem;
+    }
+}
+
+@media only screen and (min-width:600px) {
+
+    .footer {
+        padding: 1.4rem;
+    }
+
+    .footer-content .footer-top p {
+        font-size: 1.262rem;
+    }
+
+    .footer-link ul li a {
+        font-size: 1.2rem;
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-areas: "footer-top footer-top link-1 link-2""link-3 link-4 . .";
+        column-gap: 40px;
+        row-gap: 30px;
+    }
+
+    .one, .two {
+        margin: .5rem 0;
+    }
+}
+
+@media only screen and (min-width:768px) {
+
+    .footer {
+        padding: 1.5rem;
+    }
+
+    .footer-content .footer-top p {
+        font-size: 1.4rem;
+    }
+
+    .footer-top h2 {
+        font-size: 1.6rem;
+    }
+
+    .footer-link h3 {
+        font-size: 1.5rem;
+    }
+
+    .footer-link ul li a {
+        font-size: 1.4rem;
+    }
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-areas: "footer-top footer-top link-1 link-2""link-3 link-4 . .";
+    }
+
+    .one, .two {
+        margin: .5rem 0;
+    }
+}
+
+@media only screen and (min-width:810px) {
+
+    .footer {
+        width: 100%;
+        padding: 4rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .footer-content .footer-top p {
+        margin-top: 1rem;
+        font-size: 1.1rem;
+    }
+
+    .footer-top h2 {
+        font-size: 1.6rem;
+    }
+
+    .footer-link h3 {
+        font-size: 1.3rem;
+    }
+
+    .footer-link ul li a {
+        font-size: 1.1rem;
+    }
+
+    .footer-content {
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto;
+        grid-template-areas: "footer-top footer-top link-1 link-2""link-3 link-4 . .";
+        column-gap: 40px;
+        row-gap: 30px;
+    }
+
+    .one, .two {
+        margin: .5rem 0;
+    }
+}
+
+@media only screen and (min-width:1180px) {
+
+    .footer-content {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        grid-template-areas: "footer-top footer-top link-1 link-2 link-3 link-4";
+        column-gap: 30px;
+    }
+
+    .footer-top {
+        margin-right: 2rem;
+    }
+
+    .footer-link {
+        display: flex;
+        justify-content: center;
+    }
+
+    .three, .four {
+        margin: .5rem 0;
+    }
+}
+
+@media only screen and (min-width:1300px) {
+    .footer {
+        padding: 2rem 6rem;
+    }
+
+}

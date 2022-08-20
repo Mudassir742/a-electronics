@@ -6,6 +6,7 @@ import { styled } from "@mui/material/styles";
 import Banner from "src/components/banner/Banner";
 import Categories from "src/components/categories/Categories";
 import SecondaryBanner from "src/components/banner/SecondaryBanner";
+import Footer from "src/components/footer/Footer";
 
 const RootStyle = styled("section")(({ theme, stickey }) => ({}));
 
@@ -15,6 +16,7 @@ const Home = () => {
       <Banner />
       <Categories />
       <SecondaryBanner />
+      <Footer />
     </RootStyle>
   );
 };

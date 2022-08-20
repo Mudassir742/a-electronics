@@ -4,7 +4,8 @@ import { styled } from "@mui/material/styles";
 import BudsImage from "./GalaxyBuds.jpg";
 
 const RootStyle = styled(Box)(({ theme, stickey }) => ({
-  padding: "2rem 0 2rem 2rem",
+  padding: "1rem 0 2rem 2rem",
+  marginBottom: "2rem",
   width: "100vw",
   maxWidth: "100%",
   overflow: "hidden",
@@ -64,7 +65,7 @@ const ImageWrapper = styled(Box)(({ theme }) => ({
 const Image = styled("img")(({ theme }) => ({
   width: "85%",
   maxWidth: "1000px",
-  maxHeight: "550px",
+  maxHeight: "600px",
   [theme.breakpoints.down(901)]: {
     width: "100%",
     height: "100%",
