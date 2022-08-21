@@ -11,7 +11,7 @@ const ProductGrid = styled(Grid)(({ theme }) => ({}));
 
 const ProductList = () => {
   const matches = useMediaQuery("(max-width:600px)");
-  console.log(matches);
+
   return (
     <ProductContainer>
       <Typography variant="h4" marginBottom="2rem" color="#050704">

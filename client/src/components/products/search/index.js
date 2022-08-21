@@ -42,7 +42,7 @@ const SearchSection = () => {
             <InputField type="text" placeholder="Seach Product" />
           </InputContainer>
           <SearchButton>
-            <Icon icon="bi:search" width={28} height={28} color="white" />
+            <Icon icon="bi:search" width={26} height={26} color="white" />
           </SearchButton>
         </FormContainer>
 

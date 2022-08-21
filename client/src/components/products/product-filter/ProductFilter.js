@@ -5,12 +5,13 @@ import Icon from "src/components/Iconify";
 
 const FilterContainer = styled(Box)(({ theme }) => ({
   margin: "0 2rem 3rem 3rem",
+  height: "50px",
 }));
 
 const FilterButton = styled(Button)(({ theme }) => ({
   display: "flex",
-  height: "50px",
   width: "200px",
+  height: "100%",
   alignItems: "center",
   justifyContent: "center",
   background: "#050704",

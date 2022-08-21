@@ -8,6 +8,9 @@ export const RootStyle = styled("div")(({ theme }) => ({
   maxHeight: "500px",
   marginBottom: "3rem",
   position: "relative",
+  [theme.breakpoints.down(501)]: {
+    paddingBottom: "3rem",
+  },
 }));
 export const Container = styled("div")(({ theme }) => ({}));
 export const SearchContainer = styled(Box)(({ theme }) => ({
@@ -23,6 +26,22 @@ export const SearchContainer = styled(Box)(({ theme }) => ({
   transform: "translateX(50%)",
   bottom: "-30px",
   padding: "0 4rem",
+  [theme.breakpoints.down(780)]: {
+    width: "90%",
+    height: "65px",
+  },
+  [theme.breakpoints.down(640)]: {
+    width: "100%",
+  },
+  [theme.breakpoints.down(501)]: {
+    width: "100%",
+    position: "static",
+    transform: "none",
+    padding: "0",
+    marginTop: "2rem",
+    height: "auto",
+    display: "block",
+  },
 }));
 
 export const FormContainer = styled(Box)(({ theme }) => ({
@@ -32,6 +51,9 @@ export const FormContainer = styled(Box)(({ theme }) => ({
   height: "100%",
   borderRadius: "5px",
   boxShadow: "0px 2px 8px 0px rgba(46,46,46,0.4)",
+  [theme.breakpoints.down(501)]: {
+    marginBottom: "2rem",
+  },
 }));
 
 export const InputContainer = styled(Box)(({ theme }) => ({
@@ -39,6 +61,9 @@ export const InputContainer = styled(Box)(({ theme }) => ({
   width: "90%",
   background: "white",
   borderRadius: "5px 0 0 5px",
+  [theme.breakpoints.down(501)]: {
+    height: "60px",
+  },
 }));
 
 export const InputField = styled("input")(({ theme }) => ({
@@ -63,6 +88,9 @@ export const SearchButton = styled(Button)(({ theme }) => ({
   "&:hover": {
     background: "#2C3038",
   },
+  [theme.breakpoints.down(501)]: {
+    height: "60px",
+  },
 }));
 
 export const SelectCategory = styled(Box)(({ theme }) => ({
@@ -71,6 +99,9 @@ export const SelectCategory = styled(Box)(({ theme }) => ({
   width: "150px",
   Overflow: "hidden",
   borderRadius: "5px",
+  [theme.breakpoints.down(501)]: {
+    display: "none",
+  },
 }));
 
 export const CategoryButton = styled(Button)(({ theme }) => ({
