@@ -5,15 +5,16 @@ import { Outlet } from "react-router-dom";
 import { styled } from "@mui/material/styles";
 
 import CustomerNavbar from "./CustomerNavbar";
+import CustomerFooter from "./CustomerFooter";
 
-const RootStyle = styled("div")(({ theme }) => ({
-}));
+const RootStyle = styled("div")(({ theme }) => ({}));
 
 const CustomerLayout = () => {
   return (
     <RootStyle className="customerLayout">
       <CustomerNavbar />
       <Outlet />
+      <CustomerFooter />
     </RootStyle>
   );
 };

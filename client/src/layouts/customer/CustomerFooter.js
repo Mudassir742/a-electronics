@@ -1,6 +1,6 @@
 import { Typography } from "@mui/material";
 
-const Footer = () => {
+const CustomerFooter = () => {
   return (
     <footer class="footer">
       <div class="footer-content">
@@ -74,4 +74,4 @@ const Footer = () => {
   );
 };
 
-export default Footer;
+export default CustomerFooter;
