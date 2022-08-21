@@ -1,10 +1,10 @@
-import React from "react";
-
+import { useState } from "react";
 //material
 import { Typography, Button, Box } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 import Icon from "src/components/Iconify";
+import ActionMenu from "src/components/ActionMenu";
 
 const RootStyle = styled("div")(({ theme }) => ({
   padding: "8rem 3rem 4rem 3rem",
@@ -23,7 +23,7 @@ const SearchContainer = styled("box")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
-  gap: "20px",
+  gap: "30px",
   right: "50%",
   transform: "translateX(50%)",
   bottom: "-30px",
@@ -65,12 +65,42 @@ const SearchButton = styled(Button)(({ theme }) => ({
   justifyContent: "center",
   background: "#050704",
   borderRadius: "0 5px 5px 0",
-  '&:hover':{
+  "&:hover": {
     background: "#2C3038",
-  }
+  },
+}));
+
+const SelectCategory = styled(Box)(({ theme }) => ({
+  background: "#050704",
+  height: "100%",
+  width: "150px",
+  Overflow: "hidden",
+  borderRadius: "5px",
+}));
+
+const CategoryButton = styled(Button)(({ theme }) => ({
+  display: "flex",
+  height: "100%",
+  width: "100%",
+  alignItems: "center",
+  justifyContent: "center",
+  background: "#050704",
+  color: "white",
+  borderRadius: "5px",
+  "&:hover": {
+    background: "#2C3038",
+  },
 }));
 
 const SearchSection = () => {
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
   return (
     <RootStyle>
       <Container>
@@ -87,11 +117,28 @@ const SearchSection = () => {
             <InputField type="text" placeholder="Seach Product" />
           </InputContainer>
           <SearchButton>
-            <Icon icon="bi:search" width={30} height={30} color="white" />
+            <Icon icon="bi:search" width={28} height={28} color="white" />
           </SearchButton>
         </FormContainer>
 
-        <Box>Categories</Box>
+        <SelectCategory>
+          <CategoryButton
+            id="basic-button"
+            aria-controls={open ? "basic-menu" : undefined}
+            aria-haspopup="true"
+            aria-expanded={open ? "true" : undefined}
+            onClick={handleClick}
+            startIcon={<Icon icon="fe:app-menu" width={22} height={24} />}
+          >
+            Category
+          </CategoryButton>
+          <ActionMenu
+            anchorEl={anchorEl}
+            open={open}
+            handleClick={handleClick}
+            handleClose={handleClose}
+          />
+        </SelectCategory>
       </SearchContainer>
     </RootStyle>
   );
