@@ -2,9 +2,9 @@ import { Typography } from "@mui/material";
 
 const CustomerFooter = () => {
   return (
-    <footer class="footer">
-      <div class="footer-content">
-        <div class="footer-top">
+    <footer className="footer">
+      <div className="footer-content">
+        <div className="footer-top">
           <Typography className="footer-logo" variant="h3">
             A-Electro.
           </Typography>
@@ -14,8 +14,8 @@ const CustomerFooter = () => {
             rider will be at your door step.
           </p>
         </div>
-        <div class="footer-link one">
-          <div class="link-content">
+        <div className="footer-link one">
+          <div className="link-content">
             <h3>Company</h3>
             <ul>
               <li>
@@ -31,8 +31,8 @@ const CustomerFooter = () => {
           </div>
         </div>
 
-        <div class="footer-link two">
-          <div class="link-content">
+        <div className="footer-link two">
+          <div className="link-content">
             <h3>Opportunity</h3>
             <ul>
               <li>
@@ -42,8 +42,8 @@ const CustomerFooter = () => {
           </div>
         </div>
 
-        <div class="footer-link three">
-          <div class="link-content">
+        <div className="footer-link three">
+          <div className="link-content">
             <h3>Sitemap</h3>
             <ul>
               <li>
@@ -53,8 +53,8 @@ const CustomerFooter = () => {
           </div>
         </div>
 
-        <div class="footer-link four">
-          <div class="link-content">
+        <div className="footer-link four">
+          <div className="link-content">
             <h3>Resources</h3>
             <ul>
               <li>
