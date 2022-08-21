@@ -65,6 +65,9 @@ const SearchButton = styled(Button)(({ theme }) => ({
   justifyContent: "center",
   background: "#050704",
   borderRadius: "0 5px 5px 0",
+  '&:hover':{
+    background: "#2C3038",
+  }
 }));
 
 const SearchSection = () => {
