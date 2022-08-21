@@ -4,10 +4,10 @@ import { Button, Box } from "@mui/material";
 import Icon from "src/components/Iconify";
 
 const FilterContainer = styled(Box)(({ theme }) => ({
-  margin: "0 2rem 2rem 3rem",
+  margin: "0 2rem 3rem 3rem",
 }));
 
-export const FilterButton = styled(Button)(({ theme }) => ({
+const FilterButton = styled(Button)(({ theme }) => ({
   display: "flex",
   height: "50px",
   width: "200px",
