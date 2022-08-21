@@ -55,7 +55,7 @@ const CustomerNavbar = () => {
           <NavLink to="/app/home" className="link">
             Home
           </NavLink>
-          <NavLink to="/app/products" className="link">
+          <NavLink to="/app/products-list" className="link">
             Products
           </NavLink>
           <NavLink to="/app/orders" className="link">
