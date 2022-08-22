@@ -1,7 +1,7 @@
 import React from "react";
 // material
 import { styled } from "@mui/material/styles";
-import { Box, Drawer, Typography } from "@mui/material";
+import { Drawer } from "@mui/material";
 
 const RootStyle = styled("div")(({ theme }) => ({}));
 
