@@ -1,9 +1,11 @@
 //material
-import { Box, Avatar, Typography, Stack } from "@mui/material";
+import { Box, Avatar, Typography } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 //components
 import account from "src/_mock/account";
+import navConfig from "src/layouts/customer/NavConfig";
+import NavSection from "../NavSection";
 
 //-------------------------------------------------------------------
 
@@ -22,8 +24,8 @@ const AccountDetail = styled(Box)(({ theme }) => ({
   marginTop: "2rem",
 }));
 
-const NavItems = styled(Stack)(({ theme }) => ({
-  padding: "2rem",
+const NavItems = styled(Box)(({ theme }) => ({
+  padding: "2rem 1rem",
 }));
 
 //----------------------------------------------------
@@ -47,7 +49,7 @@ const CustomerProfile = () => {
         </AccountDetail>
       </CustomerInfo>
       <NavItems>
-        
+        <NavSection navConfig={navConfig} />
       </NavItems>
     </RootStyle>
   );
