@@ -1,6 +1,6 @@
 import { useState } from "react";
 //material
-import { Pagination } from "@mui/material";
+import { Pagination, useMediaQuery } from "@mui/material";
 import { styled } from "@mui/material/styles";
 //components
 import SearchSection from "src/components/products/search";
@@ -25,7 +25,7 @@ const PaginationWrapper = styled(Box)(({ theme }) => ({
 
 const Home = () => {
   const [open, setOpen] = useState(false);
-
+  const matches = useMediaQuery("(max-width:500px)");
   return (
     <>
       <CustomerDrawer
@@ -40,7 +40,11 @@ const Home = () => {
         <ProductFilter handleFilterSidebar={() => setOpen(!open)} />
         <ProductList />
         <PaginationWrapper>
-          <Pagination count={10} color="custom" size="large" />
+          <Pagination
+            count={10}
+            color="custom"
+            size={matches ? "small" : "large"}
+          />
         </PaginationWrapper>
       </RootStyle>
     </>
