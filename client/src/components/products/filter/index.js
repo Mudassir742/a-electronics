@@ -29,11 +29,7 @@ const Filter = ({ onCloseSidebar }) => {
         <Typography variant="h5" color="#050704">
           Filter
         </Typography>
-        <IconButton
-          sx={{ color: "#050704" }}
-          aria-label="add an alarm"
-          onClick={onCloseSidebar}
-        >
+        <IconButton sx={{ color: "#050704" }} onClick={onCloseSidebar}>
           <Icon
             icon="fluent-emoji-high-contrast:cross-mark"
             width={22}
@@ -46,10 +42,7 @@ const Filter = ({ onCloseSidebar }) => {
         <ChipWrapper>
           <Chip>
             <Typography variant="subtitle">price</Typography>
-            <IconButton
-              sx={{ color: "#050704", background: "#e7e7e2" }}
-              aria-label="add an alarm"
-            >
+            <IconButton sx={{ color: "#050704", background: "#e7e7e2" }}>
               <Icon
                 icon="fluent-emoji-high-contrast:cross-mark"
                 width={12}

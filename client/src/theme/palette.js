@@ -84,6 +84,7 @@ const ERROR = {
 
 const CUSTOM = {
   main: "#050704",
+  contrastText: "#fff",
 };
 
 const GRADIENTS = {
