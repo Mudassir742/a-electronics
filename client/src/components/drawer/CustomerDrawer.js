@@ -12,7 +12,7 @@ const CustomerDrawer = ({ isOpenSidebar, onCloseSidebar, children }) => {
         open={isOpenSidebar}
         onClose={onCloseSidebar}
         PaperProps={{
-          sx: { width: "280px" },
+          sx: { width: "280px",background:'#EFEEEA' },
         }}
       >
         {children}
