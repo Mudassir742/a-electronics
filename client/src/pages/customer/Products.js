@@ -22,7 +22,7 @@ const Home = () => {
         isOpenSidebar={open}
         onCloseSidebar={() => setOpen(false)}
       >
-        <Filter />
+        <Filter onCloseSidebar={() => setOpen(false)} />
       </CustomerDrawer>
       <RootStyle>
         <SearchSection />

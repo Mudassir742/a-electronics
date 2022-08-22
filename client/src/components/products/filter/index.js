@@ -22,14 +22,18 @@ import {
 import Icon from "src/components/Iconify";
 import CustomFormControlLabel from "src/components/CustomRadioButton";
 
-const Filter = () => {
+const Filter = ({ onCloseSidebar }) => {
   return (
     <RootStyle>
       <FilterHeader>
         <Typography variant="h5" color="#050704">
           Filter
         </Typography>
-        <IconButton sx={{ color: "#050704" }} aria-label="add an alarm">
+        <IconButton
+          sx={{ color: "#050704" }}
+          aria-label="add an alarm"
+          onClick={onCloseSidebar}
+        >
           <Icon
             icon="fluent-emoji-high-contrast:cross-mark"
             width={22}
@@ -114,9 +118,38 @@ const Filter = () => {
             />
           </RadioGroup>
         </FilterWrapper>
+        <Divider sx={{ margin: ".75rem 0" }} />
+
+        <FilterWrapper>
+          <Typography variant="h6" color="#050704">
+            Company
+          </Typography>
+          <RadioGroup
+            aria-labelledby="demo-radio-buttons-group-label"
+            name="radio-buttons-group"
+            sx={{ margin: ".8rem 0" }}
+          >
+            <CustomFormControlLabel
+              value="hp"
+              label="HP"
+              control={<Radio color="custom" />}
+            />
+            <CustomFormControlLabel
+              value="dell"
+              label="Dell"
+              control={<Radio color="custom" />}
+            />
+            <CustomFormControlLabel
+              value="apple"
+              label="Apple"
+              control={<Radio color="custom" />}
+            />
+          </RadioGroup>
+        </FilterWrapper>
+        <Divider sx={{ margin: ".75rem 0" }} />
       </FilterSection>
       <ButtonWrapper>
-        <FilterButton>Apply Filter</FilterButton>
+        <FilterButton onClick={onCloseSidebar}>Apply Filter</FilterButton>
       </ButtonWrapper>
     </RootStyle>
   );
