@@ -5,7 +5,7 @@ import { Drawer } from "@mui/material";
 
 const RootStyle = styled("div")(({ theme }) => ({}));
 
-const CustomerDrawer = ({ isOpenSidebar, onCloseSidebar }) => {
+const CustomerDrawer = ({ isOpenSidebar, onCloseSidebar, children }) => {
   return (
     <RootStyle>
       <Drawer
@@ -15,7 +15,7 @@ const CustomerDrawer = ({ isOpenSidebar, onCloseSidebar }) => {
           sx: { width: "280px" },
         }}
       >
-        renderContent
+        {children}
       </Drawer>
     </RootStyle>
   );
