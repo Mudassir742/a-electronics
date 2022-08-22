@@ -24,7 +24,7 @@ const RootStyle = styled(Box)(({ theme }) => ({
 const FilterHeader = styled(Box)(({ theme }) => ({
   display: "flex",
   alignItems: "center",
-  gap: "180px",
+  gap: "160px",
   padding: "2rem 1rem",
   marginBottom: "1rem",
   position: "fixed",
@@ -91,13 +91,14 @@ const Filter = () => {
         <Typography variant="h5" color="#050704">
           Filter
         </Typography>
-
-        <Icon
-          icon="fluent-emoji-high-contrast:cross-mark"
-          width={22}
-          height={22}
-          color="#050704"
-        />
+        <IconButton sx={{ color: "#050704" }} aria-label="add an alarm">
+          <Icon
+            icon="fluent-emoji-high-contrast:cross-mark"
+            width={22}
+            height={22}
+            color="#050704"
+          />
+        </IconButton>
       </FilterHeader>
       <FilterSection>
         <ChipWrapper>
