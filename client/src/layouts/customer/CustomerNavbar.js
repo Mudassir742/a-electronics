@@ -1,6 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
+import { useMediaQuery } from "@mui/material";
 import { styled } from "@mui/material/styles";
+
+//components
+import CustomerDrawer from "src/components/drawer/CustomerDrawer";
+import Icon from "src/components/Iconify";
+import CustomerProfile from "src/components/customer-profile/CustomerProfile";
 
 const RootStyle = styled("header")(({ theme, stickey }) => ({
   width: "100vw",
@@ -35,10 +41,15 @@ const NavItems = styled("nav")(({ theme }) => ({
   justifyContent: "center",
   gap: "2rem",
   width: "30%",
+  [theme.breakpoints.down(769)]: {
+    display: "none",
+  },
 }));
 
 const CustomerNavbar = () => {
   const [style, setStyle] = useState(false);
+  const [open, setOpen] = useState(false);
+  const isTablet = useMediaQuery("(max-width:768px)");
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -48,23 +59,44 @@ const CustomerNavbar = () => {
   }, []);
 
   return (
-    <RootStyle stickey={style}>
-      <Header>
-        <h2 className="logo">Logo</h2>
-        <NavItems>
-          <NavLink to="/app/home" className="link">
-            Home
-          </NavLink>
-          <NavLink to="/app/products-list" className="link">
-            Products
-          </NavLink>
-          <NavLink to="/app/orders" className="link">
-            Order
-          </NavLink>
-        </NavItems>
-        <div>Account</div>
-      </Header>
-    </RootStyle>
+    <>
+      {isTablet && (
+        <CustomerDrawer
+          isOpenSidebar={open}
+          onCloseSidebar={() => setOpen(false)}
+        >
+          <CustomerProfile />
+        </CustomerDrawer>
+      )}
+      <RootStyle stickey={style}>
+        <Header>
+          <h2 className="logo">Logo</h2>
+          <NavItems>
+            <NavLink to="/app/home" className="link">
+              Home
+            </NavLink>
+            <NavLink to="/app/products-list" className="link">
+              Products
+            </NavLink>
+            <NavLink to="/app/orders" className="link">
+              Order
+            </NavLink>
+          </NavItems>
+          {isTablet ? (
+            <div>
+              <Icon
+                onClick={() => setOpen(true)}
+                icon="heroicons-solid:menu"
+                width={50}
+                height={40}
+              />
+            </div>
+          ) : (
+            <h4>Account</h4>
+          )}
+        </Header>
+      </RootStyle>
+    </>
   );
 };
 
