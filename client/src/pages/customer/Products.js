@@ -1,8 +1,10 @@
+import { useState } from "react";
 import { styled } from "@mui/material/styles";
 //components
 import SearchSection from "src/components/products/search";
 import ProductFilter from "src/components/products/product-filter/ProductFilter";
 import ProductList from "src/components/products/product-listing";
+import CustomerDrawer from "src/components/drawer/CustomerDrawer";
 
 const RootStyle = styled("section")(({ theme }) => ({}));
 const Divider = styled("div")(({ theme }) => ({
@@ -11,13 +13,21 @@ const Divider = styled("div")(({ theme }) => ({
 }));
 
 const Home = () => {
+  const [open, setOpen] = useState(false);
+
   return (
-    <RootStyle>
-      <SearchSection />
-      <Divider />
-      <ProductFilter />
-      <ProductList />
-    </RootStyle>
+    <>
+      <CustomerDrawer
+        isOpenSidebar={open}
+        onCloseSidebar={() => setOpen(false)}
+      />
+      <RootStyle>
+        <SearchSection />
+        <Divider />
+        <ProductFilter handleFilterSidebar={() => setOpen(!open)} />
+        <ProductList />
+      </RootStyle>
+    </>
   );
 };
 

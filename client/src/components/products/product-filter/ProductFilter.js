@@ -22,11 +22,12 @@ const FilterButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const ProductFilter = () => {
+const ProductFilter = ({ handleFilterSidebar }) => {
   return (
     <FilterContainer>
       <FilterButton
         startIcon={<Icon icon="akar-icons:filter" width={22} height={24} />}
+        onClick={handleFilterSidebar}
       >
         Filter
       </FilterButton>
