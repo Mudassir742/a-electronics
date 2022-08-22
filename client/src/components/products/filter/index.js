@@ -8,6 +8,8 @@ import {
   RadioGroup,
   Radio,
   Button,
+  IconButton,
+  Stack,
 } from "@mui/material";
 
 //components
@@ -29,8 +31,9 @@ const FilterHeader = styled(Box)(({ theme }) => ({
   top: 0,
   left: 0,
   height: "80px",
-  width:'280px',
+  width: "280px",
   background: "#EFEEEA",
+  zIndex: "1000",
 }));
 
 const FilterWrapper = styled(Box)(({ theme }) => ({
@@ -52,6 +55,7 @@ const ButtonWrapper = styled(Box)(({ theme }) => ({
   position: "fixed",
   bottom: 0,
   left: 0,
+  zIndex: "1000",
 }));
 
 const FilterButton = styled(Button)(({ theme }) => ({
@@ -68,7 +72,17 @@ const FilterButton = styled(Button)(({ theme }) => ({
   },
 }));
 
-const Chip = styled(Box)(({ theme }) => ({}));
+const ChipWrapper = styled(Box)(({ theme }) => ({}));
+
+const Chip = styled(Stack)(({ theme }) => ({
+  flexDirection: "row",
+  alignItems: "center",
+  gap: ".6rem",
+  border: "1px solid #050704",
+  width: "min-content",
+  borderRadius: "50px",
+  padding: ".1rem 0 .1rem .4rem",
+}));
 
 const Filter = () => {
   return (
@@ -77,6 +91,7 @@ const Filter = () => {
         <Typography variant="h5" color="#050704">
           Filter
         </Typography>
+
         <Icon
           icon="fluent-emoji-high-contrast:cross-mark"
           width={22}
@@ -85,6 +100,22 @@ const Filter = () => {
         />
       </FilterHeader>
       <FilterSection>
+        <ChipWrapper>
+          <Chip>
+            <Typography variant="subtitle">price</Typography>
+            <IconButton
+              sx={{ color: "#050704", background: "#e7e7e2" }}
+              aria-label="add an alarm"
+            >
+              <Icon
+                icon="fluent-emoji-high-contrast:cross-mark"
+                width={12}
+                height={12}
+                color="#050704"
+              />
+            </IconButton>
+          </Chip>
+        </ChipWrapper>
         <Divider sx={{ margin: ".75rem 0" }} />
         <FilterWrapper>
           <Typography variant="h6" color="#050704">
