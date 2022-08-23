@@ -1,52 +1,25 @@
 //material
-import {
-  Box,
-  Typography,
-  Stack,
-  Button,
-  Grid,
-  IconButton,
-} from "@mui/material";
+import { Box, Typography, Stack, Grid } from "@mui/material";
 import { styled } from "@mui/material/styles";
 //components
 import ItemImage from "src/assets/omenLaptop.png";
-import Icon from "src/components/Iconify";
+import CartItem from "src/components/shopping-cart/CartItem";
 
 //-----------------------------------------------------------
 const RootStyle = styled("section")(({ theme, stickey }) => ({
   padding: "8rem 5rem 4rem 5rem",
   background: "#EFEEEA",
 }));
-const CartContainer = styled(Grid)(({ theme, stickey }) => ({
-  border: "1px solid black",
-}));
-const CartItemContainer = styled(Stack)(({ theme, stickey }) => ({
-  margin: "3rem 1rem",
-}));
-const CartItemCard = styled(Box)(({ theme, stickey }) => ({
-  display: "flex",
-  alignItems: "center",
-  gap: "1rem",
-}));
-const Image = styled("img")(({ theme }) => ({
-  height: "auto",
-  width: "120px",
-  maxWidth: "120px",
-}));
-const ItemInfo = styled(Box)(({ theme, stickey }) => ({
-  display: "flex",
-  flexDirection: "column",
-  gap: ".5rem",
+const CartContainer = styled(Box)(({ theme, stickey }) => ({}));
+
+const Divider = styled(Box)(({ theme, stickey }) => ({
+  borderBottom: "1px solid #D5D5D5",
+  marginBottom: "1rem",
 }));
 
-const ItemQuantity = styled(Stack)(({ theme, stickey }) => ({}));
-
-const QuantityLabel = styled(Typography)(({ theme, stickey }) => ({
+const OrderSummary = styled(Box)(({ theme, stickey }) => ({
   border: "1px solid black",
-  width: "40px",
-  padding: ".2rem 0",
-  textAlign: "center",
-  borderRadius: "5px",
+  padding: "1rem",
 }));
 
 //-----------------------------------------------------------
@@ -58,37 +31,23 @@ const ShoppingCart = () => {
         <Grid item md={8}>
           <CartContainer>
             <Stack direction="row" justifyContent="space-between">
-              <Typography variant="h4" color="custom">
+              <Typography variant="h4" color="custom" marginLeft="1rem">
                 Items
               </Typography>
-              <Button color="custom">Clear</Button>
+              {/* <Button color="custom">Clear</Button> */}
             </Stack>
-            <CartItemContainer
-              direction="row"
-              alignItems="center"
-              justifyContent="space-between"
-            >
-              <CartItemCard>
-                <Image src={ItemImage} alt="item" />
-                <ItemInfo>
-                  <Typography>Omen Laptop 12th Gen</Typography>
-                  <Typography>HP</Typography>
-                </ItemInfo>
-              </CartItemCard>
-
-              <ItemQuantity direction="row" gap=".6rem" alignItems="center">
-                <IconButton>
-                  <Icon icon="akar-icons:minus" width={19} height={20} />
-                </IconButton>
-                <QuantityLabel>2</QuantityLabel>
-                <IconButton>
-                  <Icon icon="akar-icons:plus" width={20} height={20} />
-                </IconButton>
-              </ItemQuantity>
-
-              <Typography fontWeight="bold">1000$</Typography>
-            </CartItemContainer>
+            <CartItem ItemImage={ItemImage} />
+            <Divider />
+            <CartItem ItemImage={ItemImage} />
+            <Divider />
+            <CartItem ItemImage={ItemImage} />
+            <Divider />
+            <CartItem ItemImage={ItemImage} />
+            <Divider />
           </CartContainer>
+        </Grid>
+        <Grid item md={4}>
+          <OrderSummary>order summary</OrderSummary>
         </Grid>
       </Grid>
     </RootStyle>
