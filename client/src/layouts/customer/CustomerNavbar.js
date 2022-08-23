@@ -121,8 +121,8 @@ const CustomerNavbar = () => {
               />
             </div>
           ) : (
-            <Stack direction="row" alignItems="center" gap="1rem">
-              <NavLink to="/app/home" className="link">
+            <Stack direction="row" alignItems="end" gap="1rem">
+              <NavLink to="/app/cart" className="link">
                 <CartContainer>
                   <Icon icon="eva:shopping-cart-fill" width={44} height={44} />
                   <ItemCount>11</ItemCount>
