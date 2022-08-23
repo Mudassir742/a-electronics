@@ -1,12 +1,20 @@
 import React, { useState, useEffect } from "react";
 import { NavLink } from "react-router-dom";
-import { useMediaQuery } from "@mui/material";
+import {
+  useMediaQuery,
+  Box,
+  Typography,
+  Avatar,
+  Stack,
+  Divider,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 //components
 import CustomerDrawer from "src/components/drawer/CustomerDrawer";
 import Icon from "src/components/Iconify";
 import CustomerProfile from "src/components/customer-profile/CustomerProfile";
+import account from "src/_mock/account";
 
 const RootStyle = styled("header")(({ theme, stickey }) => ({
   width: "100vw",
@@ -44,6 +52,27 @@ const NavItems = styled("nav")(({ theme }) => ({
   [theme.breakpoints.down(769)]: {
     display: "none",
   },
+}));
+
+const CartContainer = styled(Box)(({ theme }) => ({
+  position: "relative",
+}));
+
+const ItemCount = styled(Typography)(({ theme }) => ({
+  position: "absolute",
+  top: 0,
+  right: 0,
+  width: "22px",
+  height: "22px",
+  borderRadius: "11px",
+  paddingTop: "1px",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+  color: theme.palette.custom.main,
+  background: "white",
+  fontWeight: "bold",
+  fontSize: "13px",
 }));
 
 const CustomerNavbar = () => {
@@ -92,7 +121,20 @@ const CustomerNavbar = () => {
               />
             </div>
           ) : (
-            <h4>Account</h4>
+            <Stack direction="row" alignItems="center" gap="1rem">
+              <NavLink to="/app/home" className="link">
+                <CartContainer>
+                  <Icon icon="eva:shopping-cart-fill" width={44} height={44} />
+                  <ItemCount>11</ItemCount>
+                </CartContainer>
+              </NavLink>
+              <Divider orientation="vertical" />
+              <Avatar
+                src={account.photoURL}
+                alt="photoURL"
+                sx={{ width: 52, height: 52 }}
+              />
+            </Stack>
           )}
         </Header>
       </RootStyle>
