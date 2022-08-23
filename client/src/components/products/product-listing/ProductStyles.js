@@ -28,8 +28,7 @@ export const ProductInfoContainer = styled(Box)(({ theme }) => ({
   padding: "1rem 1.5rem",
 }));
 
-export const ProductInfo = styled(Typography)(({ theme, fontsize }) => ({
-  fontSize: fontsize && fontsize,
+export const ProductInfo = styled(Typography)(({ theme }) => ({
   color: "#050704",
 }));
 export const ProductPriceContainer = styled(Typography)(({ theme }) => ({

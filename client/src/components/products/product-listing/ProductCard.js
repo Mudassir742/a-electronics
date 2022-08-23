@@ -25,9 +25,9 @@ const ProductCard = () => {
           Hp-Omen Laptop
         </ProductInfo>
         <ProductPriceContainer>
-          <ProductInfo fontsize="1.1rem">1000 $</ProductInfo>
+          <ProductInfo fontSize="1.1rem">1000 $</ProductInfo>
           <ProductRating>
-            <ProductInfo fontsize="1.1rem">4.8(20)</ProductInfo>
+            <ProductInfo fontSize="1.1rem">4.8(20)</ProductInfo>
             <Icon icon="eva:star-fill" width={28} height={28} color="#FBED21" />
           </ProductRating>
         </ProductPriceContainer>
