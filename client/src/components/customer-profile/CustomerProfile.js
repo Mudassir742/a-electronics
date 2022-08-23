@@ -25,7 +25,7 @@ const AccountDetail = styled(Box)(({ theme }) => ({
 }));
 
 const NavItems = styled(Box)(({ theme }) => ({
-  padding: "2rem 1rem",
+  padding: "2rem .5rem",
 }));
 
 //----------------------------------------------------
