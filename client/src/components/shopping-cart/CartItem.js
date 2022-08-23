@@ -10,7 +10,7 @@ import { styled } from "@mui/material/styles";
 import Icon from "src/components/Iconify";
 
 const CartItemContainer = styled(Stack)(({ theme, stickey }) => ({
-  margin: "5rem 0 3rem 0",
+  margin: "3rem 0 3rem 0",
 }));
 const CartItemCard = styled(Box)(({ theme, stickey }) => ({
   display: "flex",
@@ -54,11 +54,11 @@ const CartItem = ({ItemImage}) => {
       </CartItemCard>
 
       <ItemQuantity direction="row" gap=".6rem" alignItems="center">
-        <IconButton>
+        <IconButton color="custom">
           <Icon icon="akar-icons:minus" width={19} height={20} />
         </IconButton>
         <QuantityLabel>2</QuantityLabel>
-        <IconButton>
+        <IconButton color="custom">
           <Icon icon="akar-icons:plus" width={20} height={20} />
         </IconButton>
       </ItemQuantity>

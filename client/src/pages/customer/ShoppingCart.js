@@ -27,15 +27,15 @@ const OrderSummary = styled(Box)(({ theme, stickey }) => ({
 const ShoppingCart = () => {
   return (
     <RootStyle>
+      <Stack direction="row" justifyContent="space-between" marginTop="2rem">
+        <Typography variant="h4" color="custom" marginLeft="1rem">
+          Items
+        </Typography>
+        {/* <Button color="custom">Clear</Button> */}
+      </Stack>
       <Grid container margin="2rem 0" spacing={2}>
         <Grid item md={8}>
           <CartContainer>
-            <Stack direction="row" justifyContent="space-between">
-              <Typography variant="h4" color="custom" marginLeft="1rem">
-                Items
-              </Typography>
-              {/* <Button color="custom">Clear</Button> */}
-            </Stack>
             <CartItem ItemImage={ItemImage} />
             <Divider />
             <CartItem ItemImage={ItemImage} />
@@ -47,7 +47,7 @@ const ShoppingCart = () => {
           </CartContainer>
         </Grid>
         <Grid item md={4}>
-          <OrderSummary>order summary</OrderSummary>
+          <OrderSummary marginTop="3rem">order summary</OrderSummary>
         </Grid>
       </Grid>
     </RootStyle>
