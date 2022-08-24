@@ -21,7 +21,7 @@ export default function Router() {
   return useRoutes([
     {
       path: "/",
-      element: <Navigate to="/app/home" replace />,
+      element: <Navigate to="/dashboard/main" replace />,
     },
     {
       path: "/dashboard",

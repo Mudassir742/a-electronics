@@ -11,6 +11,7 @@ import {
   MenuItem,
   Box,
   Grid,
+  Button,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -47,6 +48,7 @@ const ProductForm = () => {
     model: "",
     quantity: "",
     description: "",
+    image: "",
   });
 
   const { data: categoryList = [], isLoading } = useQuery(
@@ -93,14 +95,16 @@ const ProductForm = () => {
       const requestURL =
         isEdit === true ? `/update-product/${productId}` : "/add-product";
 
-      await requestMethod(requestURL, {
-        name: values.name,
-        categoryId: values.categoryId,
-        price: values.price,
-        model: values.model,
-        quantity: values.quantity,
-        description: values.description,
-      });
+      const formData = new FormData();
+      formData.append("name", values.name);
+      formData.append("categoryId", values.categoryId);
+      formData.append("price", values.price);
+      formData.append("model", values.model);
+      formData.append("quantity", values.quantity);
+      formData.append("description", values.description);
+      formData.append("image", values.image);
+
+      await requestMethod(requestURL, formData);
     },
     {
       onSuccess: (data) => {
@@ -127,6 +131,7 @@ const ProductForm = () => {
           model: product.model,
           quantity: product.quantity,
           description: product.description,
+          image: product.image,
         }}
         validationSchema={Yup.object().shape({
           name: Yup.string().max(50).required("Name is required"),
@@ -137,6 +142,7 @@ const ProductForm = () => {
           description: Yup.string()
             .max(255)
             .required("Description is required"),
+            image: Yup.string().max(20).required("image is required"),
         })}
         enableReinitialize={true}
         onSubmit={(values) => handleAddProduct.mutate(values)}
@@ -146,12 +152,54 @@ const ProductForm = () => {
           handleBlur,
           handleChange,
           handleSubmit,
+          setFieldValue,
           isSubmitting,
           touched,
           values,
         }) => (
           <form onSubmit={handleSubmit}>
             <Grid container spacing={4}>
+              {/* <Grid item xs={9}>
+                <FormControl
+                  fullWidth
+                  error={Boolean(touched.image && errors.image)}
+                >
+                  <InputLabel htmlFor="category-image">Image</InputLabel>
+                  <OutlinedInput
+                    id="category-image"
+                    type="text"
+                    value={values.image}
+                    name="image"
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    label="Image"
+                    inputProps={{ readOnly: true }}
+                  />
+                  {touched.image && errors.image && (
+                    <FormHelperText
+                      error
+                      id="standard-weight-helper-text-title"
+                    >
+                      {errors.image}
+                    </FormHelperText>
+                  )}
+                </FormControl>
+              </Grid> */}
+              <Grid item xs={12}>
+                <Button
+                  variant="contained"
+                  component="label"
+                  sx={{ width: "100%", height: "100%" }}
+                >
+                  Upload
+                  <input
+                    hidden
+                    accept="image/*"
+                    type="file"
+                    onChange={(e) => {setFieldValue("image", e.target.files[0]); console.log(e.target.files[0])}}
+                  />
+                </Button>
+              </Grid>
               <Grid item xs={6}>
                 <FormControl
                   fullWidth
