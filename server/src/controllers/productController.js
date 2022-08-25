@@ -1,12 +1,21 @@
 const Product = require("../models/productModel");
 const Category = require("../models/categoryModel");
-const {uploadImage} = require("../lib/cloudinaryImageUpload")
+const { uploadImage } = require("../lib/cloudinaryImageUpload");
 
 exports.addNewProduct = async (req, res) => {
   try {
-    const { categoryId, name, price, description, quantity, model ,image} = req.body;
+    const { categoryId, name, price, description, quantity, model, image } =
+      req.body;
 
-    if (!categoryId || !name || !price || !description || !quantity || !model || !image) {
+    if (
+      !categoryId ||
+      !name ||
+      !price ||
+      !description ||
+      !quantity ||
+      !model ||
+      !image
+    ) {
       return res.status(400).json({
         error: "bad input",
       });
@@ -17,7 +26,7 @@ exports.addNewProduct = async (req, res) => {
       return res.status(404).json({ error: "no category found" });
     }
 
-    //const {imageURL} = await uploadImage(image)
+    const { imageURL } = await uploadImage(image);
 
     const newProduct = await Product.create({
       categoryId,
@@ -26,7 +35,7 @@ exports.addNewProduct = async (req, res) => {
       description,
       quantity,
       model,
-      image:imageURL
+      image: imageURL,
     });
     if (!newProduct) {
       return res.status(422).json({ error: "unable to add product" });
@@ -72,14 +81,23 @@ exports.updateProduct = async (req, res) => {
   try {
     const productId = req.params.id;
 
-    const { categoryId, name, price, description, quantity, model,image } = req.body;
-    if (!categoryId || !name || !price || !description || !quantity || !model || !image) {
+    const { categoryId, name, price, description, quantity, model, image } =
+      req.body;
+    if (
+      !categoryId ||
+      !name ||
+      !price ||
+      !description ||
+      !quantity ||
+      !model ||
+      !image
+    ) {
       return res.status(400).json({
         error: "bad input",
       });
     }
 
-    const {imageURL} = await uploadImage(image)
+    const { imageURL } = await uploadImage(image);
 
     const isProductUpdated = await Product.findByIdAndUpdate(
       { _id: productId },
@@ -90,7 +108,8 @@ exports.updateProduct = async (req, res) => {
           price: price,
           description: description,
           quantity: quantity,
-          model: model
+          model: model,
+          image: imageURL,
         },
       }
     );
