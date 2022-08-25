@@ -106,7 +106,7 @@ const ProductForm = () => {
       // "image", values.image;
 
       const imageBase_64 = await toBase64(values.image)
-      console.log(imageBase_64)
+      
       await requestMethod(requestURL, {
         name: values.name,
         categoryId: values.categoryId,

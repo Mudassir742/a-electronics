@@ -1,21 +1,23 @@
 const Product = require("../models/productModel");
 const Category = require("../models/categoryModel");
-const {uploadImage } = require("../lib/uploadImage")
+const {uploadImage} = require("../lib/cloudinaryImageUpload")
 
 exports.addNewProduct = async (req, res) => {
   try {
     const { categoryId, name, price, description, quantity, model ,image} = req.body;
-   console.log(image)
+
     if (!categoryId || !name || !price || !description || !quantity || !model || !image) {
       return res.status(400).json({
         error: "bad input",
       });
     }
-    uploadImage(image)
+
     const category = await Category.findById({ _id: categoryId });
     if (!category) {
       return res.status(404).json({ error: "no category found" });
     }
+
+    //const {imageURL} = await uploadImage(image)
 
     const newProduct = await Product.create({
       categoryId,
@@ -24,6 +26,7 @@ exports.addNewProduct = async (req, res) => {
       description,
       quantity,
       model,
+      image:imageURL
     });
     if (!newProduct) {
       return res.status(422).json({ error: "unable to add product" });
@@ -69,12 +72,14 @@ exports.updateProduct = async (req, res) => {
   try {
     const productId = req.params.id;
 
-    const { categoryId, name, price, description, quantity, model } = req.body;
-    if (!categoryId || !name || !price || !description || !quantity || !model) {
+    const { categoryId, name, price, description, quantity, model,image } = req.body;
+    if (!categoryId || !name || !price || !description || !quantity || !model || !image) {
       return res.status(400).json({
         error: "bad input",
       });
     }
+
+    const {imageURL} = await uploadImage(image)
 
     const isProductUpdated = await Product.findByIdAndUpdate(
       { _id: productId },
@@ -85,7 +90,7 @@ exports.updateProduct = async (req, res) => {
           price: price,
           description: description,
           quantity: quantity,
-          model: model,
+          model: model
         },
       }
     );
