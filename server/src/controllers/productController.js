@@ -4,9 +4,8 @@ const {uploadImage } = require("../lib/uploadImage")
 
 exports.addNewProduct = async (req, res) => {
   try {
-    const { categoryId, name, price, description, quantity, model } = req.body;
-    const {image} = req.files
-   
+    const { categoryId, name, price, description, quantity, model ,image} = req.body;
+   console.log(image)
     if (!categoryId || !name || !price || !description || !quantity || !model || !image) {
       return res.status(400).json({
         error: "bad input",
