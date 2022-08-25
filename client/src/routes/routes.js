@@ -14,6 +14,7 @@ import ProductForm from "src/components/forms/ProductForm";
 //customer pages
 import Home from "src/pages/customer/Home";
 import CustomerProducts from "src/pages/customer/Products";
+import ShoppingCart from "src/pages/customer/ShoppingCart";
 
 // ----------------------------------------------------------------------
 
@@ -72,6 +73,10 @@ export default function Router() {
         {
           path: "products-list",
           element: <CustomerProducts />,
+        },
+        {
+          path: "cart",
+          element: <ShoppingCart />,
         },
       ],
     },
