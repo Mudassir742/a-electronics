@@ -23,6 +23,7 @@ import Page from "../Page";
 import * as Yup from "yup";
 import { Formik } from "formik";
 import { LoadingButton } from "@mui/lab";
+import { toBase64 } from "src/utils/imageUtils";
 
 import productInstance from "src/axios/productInstance";
 import categoryInstance from "src/axios/categoryInstance";
@@ -95,16 +96,24 @@ const ProductForm = () => {
       const requestURL =
         isEdit === true ? `/update-product/${productId}` : "/add-product";
 
-      const formData = new FormData();
-      formData.append("name", values.name);
-      formData.append("categoryId", values.categoryId);
-      formData.append("price", values.price);
-      formData.append("model", values.model);
-      formData.append("quantity", values.quantity);
-      formData.append("description", values.description);
-      formData.append("image", values.image);
+      // const formData = new FormData();
+      // "name", values.name;
+      // "categoryId", values.categoryId;
+      // "price", values.price;
+      // "model", values.model;
+      // "quantity", values.quantity;
+      // "description", values.description;
+      // "image", values.image;
 
-      await requestMethod(requestURL, formData);
+      await requestMethod(requestURL, {
+        name: values.name,
+        categoryId: values.categoryId,
+        price: values.price,
+        model: values.model,
+        quantity: values.quantity,
+        description: values.description,
+        image: values.image,
+      });
     },
     {
       onSuccess: (data) => {
@@ -142,7 +151,7 @@ const ProductForm = () => {
           description: Yup.string()
             .max(255)
             .required("Description is required"),
-            image: Yup.string().max(20).required("image is required"),
+          image: Yup.string().max(20).required("image is required"),
         })}
         enableReinitialize={true}
         onSubmit={(values) => handleAddProduct.mutate(values)}
@@ -196,7 +205,10 @@ const ProductForm = () => {
                     hidden
                     accept="image/*"
                     type="file"
-                    onChange={(e) => {setFieldValue("image", e.target.files[0]); console.log(e.target.files[0])}}
+                    onChange={(e) => {
+                      setFieldValue("image", e.target.files[0]);
+                      console.log(e.target.files[0]);
+                    }}
                   />
                 </Button>
               </Grid>
