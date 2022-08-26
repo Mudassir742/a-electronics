@@ -28,6 +28,7 @@ import Icon from "../Iconify";
 
 import productInstance from "src/axios/productInstance";
 import categoryInstance from "src/axios/categoryInstance";
+import LaptopImage from "src/assets/omenLaptop.png";
 
 // -------------------------------Style Components-----------------------------------
 
@@ -35,18 +36,23 @@ const PageWrapper = styled(Page)(({ theme }) => ({
   padding: "1rem",
 }));
 
-const ImagePreviewBox = styled(Box)(({ theme }) => ({
-  border: "1px dashed #F0EAFA",
+const ImagePreviewBox = styled(Grid)(({ theme }) => ({
+  border: "1px dashed #C689E5",
   minHeight: "120px",
   height: "100%",
   borderRadius: "5px",
-  position:'relative'
+  position: "relative",
 }));
 
 const UploadButton = styled(IconButton)(({ theme }) => ({
-  position:'absolute',
-  right:2,
-  top:2
+  position: "absolute",
+  right: 2,
+  top: 2,
+}));
+
+export const Image = styled("img")(({ theme }) => ({
+  height: "100%",
+  width: "100%",
 }));
 // -----------------------------------------------------------------------------------
 
@@ -63,7 +69,7 @@ const ProductForm = () => {
     model: "",
     quantity: "",
     description: "",
-    image: "",
+    images: [],
   });
 
   const { data: categoryList = [], isLoading } = useQuery(
@@ -147,7 +153,7 @@ const ProductForm = () => {
           model: product.model,
           quantity: product.quantity,
           description: product.description,
-          image: product.image,
+          image: product.images,
         }}
         validationSchema={Yup.object().shape({
           name: Yup.string().max(50).required("Name is required"),
@@ -158,7 +164,7 @@ const ProductForm = () => {
           description: Yup.string()
             .max(255)
             .required("Description is required"),
-          image: Yup.string().max(20).required("image is required"),
+          image: Yup.string().max(20).required("image field cannot be empty"),
         })}
         enableReinitialize={true}
         onSubmit={(values) => handleAddProduct.mutate(values)}
@@ -176,15 +182,38 @@ const ProductForm = () => {
           <form onSubmit={handleSubmit}>
             <Grid container spacing={4}>
               <Grid item xs={12}>
-                <ImagePreviewBox>
+                <ImagePreviewBox container item xs={12}>
                   <UploadButton
                     color="primary"
                     aria-label="upload picture"
                     component="label"
                   >
-                    <input hidden accept="image/*" type="file" />
-                    <Icon icon="akar-icons:camera"/>
+                    <input
+                      hidden
+                      accept="image/*"
+                      type="file"
+                      onChange={(e) => {
+                        setProduct({
+                          ...product,
+                          images: [...product.images, e.target.files[0]],
+                        });
+                        console.log(product);
+                      }}
+                    />
+                    <Icon icon="akar-icons:camera" />
                   </UploadButton>
+                  <Grid item xs={3} padding="1rem">
+                    <Image src={LaptopImage} alt="image" />
+                  </Grid>
+                  <Grid item xs={3} padding="1rem">
+                    <Image src={LaptopImage} alt="image" />
+                  </Grid>
+                  <Grid item xs={3} padding="1rem">
+                    <Image src={LaptopImage} alt="image" />
+                  </Grid>
+                  <Grid item xs={3} padding="1rem">
+                    <Image src={LaptopImage} alt="image" />
+                  </Grid>
                 </ImagePreviewBox>
                 {/* <FormControl
                   fullWidth
