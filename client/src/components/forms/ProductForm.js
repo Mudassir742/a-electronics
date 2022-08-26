@@ -11,7 +11,7 @@ import {
   MenuItem,
   Box,
   Grid,
-  Button,
+  IconButton,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -24,6 +24,7 @@ import * as Yup from "yup";
 import { Formik } from "formik";
 import { LoadingButton } from "@mui/lab";
 import { toBase64 } from "src/utils/imageUtils";
+import Icon from "../Iconify";
 
 import productInstance from "src/axios/productInstance";
 import categoryInstance from "src/axios/categoryInstance";
@@ -34,6 +35,19 @@ const PageWrapper = styled(Page)(({ theme }) => ({
   padding: "1rem",
 }));
 
+const ImagePreviewBox = styled(Box)(({ theme }) => ({
+  border: "1px dashed #F0EAFA",
+  minHeight: "120px",
+  height: "100%",
+  borderRadius: "5px",
+  position:'relative'
+}));
+
+const UploadButton = styled(IconButton)(({ theme }) => ({
+  position:'absolute',
+  right:2,
+  top:2
+}));
 // -----------------------------------------------------------------------------------
 
 const ProductForm = () => {
@@ -161,8 +175,18 @@ const ProductForm = () => {
         }) => (
           <form onSubmit={handleSubmit}>
             <Grid container spacing={4}>
-              {/* <Grid item xs={9}>
-                <FormControl
+              <Grid item xs={12}>
+                <ImagePreviewBox>
+                  <UploadButton
+                    color="primary"
+                    aria-label="upload picture"
+                    component="label"
+                  >
+                    <input hidden accept="image/*" type="file" />
+                    <Icon icon="akar-icons:camera"/>
+                  </UploadButton>
+                </ImagePreviewBox>
+                {/* <FormControl
                   fullWidth
                   error={Boolean(touched.image && errors.image)}
                 >
@@ -185,13 +209,13 @@ const ProductForm = () => {
                       {errors.image}
                     </FormHelperText>
                   )}
-                </FormControl>
-              </Grid> */}
-              <Grid item xs={12}>
+                </FormControl> */}
+              </Grid>
+              {/* <Grid item xs={3}>
                 <Button
                   variant="contained"
                   component="label"
-                  sx={{ width: "100%", height: "100%" }}
+                  sx={{ width: "100%"}}
                 >
                   Upload
                   <input
@@ -204,7 +228,7 @@ const ProductForm = () => {
                     }}
                   />
                 </Button>
-              </Grid>
+              </Grid> */}
               <Grid item xs={6}>
                 <FormControl
                   fullWidth
