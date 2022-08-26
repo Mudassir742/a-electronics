@@ -12,6 +12,7 @@ import {
   Box,
   Grid,
   IconButton,
+  Card,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -28,7 +29,6 @@ import Icon from "../Iconify";
 
 import productInstance from "src/axios/productInstance";
 import categoryInstance from "src/axios/categoryInstance";
-import LaptopImage from "src/assets/omenLaptop.png";
 
 // -------------------------------Style Components-----------------------------------
 
@@ -37,11 +37,16 @@ const PageWrapper = styled(Page)(({ theme }) => ({
 }));
 
 const ImagePreviewBox = styled(Grid)(({ theme }) => ({
-  border: "1px dashed #C689E5",
+  border: "1px dashed #D8DDE1",
+  padding: "2rem 1rem",
   minHeight: "120px",
   height: "100%",
   borderRadius: "5px",
   position: "relative",
+  "&:hover": {
+    borderColor: "#7E57C2",
+    cursor: "pointer",
+  },
 }));
 
 const UploadButton = styled(IconButton)(({ theme }) => ({
@@ -50,12 +55,30 @@ const UploadButton = styled(IconButton)(({ theme }) => ({
   top: 2,
 }));
 
-export const Image = styled("img")(({ theme }) => ({
+const RemoveButton = styled(IconButton)(({ theme }) => ({
+  position: "absolute",
+  top: -15,
+  right: -15,
+  width: "35px",
+  height: "35px",
+  background: "rgb(241, 241, 241)",
+}));
+
+const ImageContainer = styled(Card)(({ theme }) => ({
+  position: "relative",
+  height: "100%",
+  width: "180px",
+  padding: "1rem",
+  overflow: "visible",
+  borderRadius: "5px",
+}));
+
+const Image = styled("img")(({ theme }) => ({
   height: "100%",
   width: "100%",
 }));
 // -----------------------------------------------------------------------------------
-
+//fluent-emoji-high-contrast:cross-mark
 const ProductForm = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -138,6 +161,13 @@ const ProductForm = () => {
     }
   );
 
+  const RemoveImageFromPreview = (deleteIndex) => {
+    setProduct({
+      ...product,
+      images: product.images.filter((image, index) => index !== deleteIndex),
+    });
+  };
+
   return (
     <PageWrapper title="Products">
       <Box marginBottom={3}>
@@ -194,18 +224,28 @@ const ProductForm = () => {
                       accept="image/*"
                       type="file"
                       onChange={(e) => {
-                        setProduct({
-                          ...product,
-                          images: [...product.images, e.target.files[0]],
-                        });
-                        console.log(product);
+                        e.target.files[0] &&
+                          setProduct({
+                            ...product,
+                            images: [...product.images, e.target.files[0]],
+                          });
                       }}
                     />
                     <Icon icon="akar-icons:camera" />
                   </UploadButton>
                   {product.images.map((image, index) => (
-                    <Grid item xs={3} padding="1rem" key={index}>
-                      <Image src={URL.createObjectURL(image)} alt="laptop" />
+                    <Grid item xs={3} key={index}>
+                      <ImageContainer>
+                        <Image src={URL.createObjectURL(image)} alt="laptop" />
+                        <RemoveButton
+                          color="custom"
+                          aria-label="remove picture"
+                          component="label"
+                          onClick={(e) => RemoveImageFromPreview(index)}
+                        >
+                          <Icon icon="fluent-emoji-high-contrast:cross-mark" />
+                        </RemoveButton>
+                      </ImageContainer>
                     </Grid>
                   ))}
 
