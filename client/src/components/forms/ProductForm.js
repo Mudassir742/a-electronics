@@ -197,7 +197,7 @@ const ProductForm = () => {
           description: Yup.string()
             .max(255)
             .required("Description is required"),
-          //image: Yup.string().max(20).required("image field cannot be empty"),
+          image: Yup.array().min(1, "Image field cannot be are empty"),
         })}
         enableReinitialize={true}
         onSubmit={(values) => handleAddProduct.mutate(values)}
@@ -251,60 +251,13 @@ const ProductForm = () => {
                       </ImageContainer>
                     </Grid>
                   ))}
-
-                  {/* <Grid item xs={3} padding="1rem">
-                    <Image src={LaptopImage} alt="image" />
-                  </Grid>
-                  <Grid item xs={3} padding="1rem">
-                    <Image src={LaptopImage} alt="image" />
-                  </Grid>
-                  <Grid item xs={3} padding="1rem">
-                    <Image src={LaptopImage} alt="image" />
-                  </Grid> */}
                 </ImagePreviewBox>
-                {/* <FormControl
-                  fullWidth
-                  error={Boolean(touched.image && errors.image)}
-                >
-                  <InputLabel htmlFor="category-image">Image</InputLabel>
-                  <OutlinedInput
-                    id="category-image"
-                    type="text"
-                    value={values.image}
-                    name="image"
-                    onBlur={handleBlur}
-                    onChange={handleChange}
-                    label="Image"
-                    inputProps={{ readOnly: true }}
-                  />
-                  {touched.image && errors.image && (
-                    <FormHelperText
-                      error
-                      id="standard-weight-helper-text-title"
-                    >
-                      {errors.image}
-                    </FormHelperText>
-                  )}
-                </FormControl> */}
+                {touched.image && errors.image && !values.length && (
+                  <FormHelperText error id="image-error" sx={{margin:'.5rem 0 2rem .8rem'}}>
+                    {errors.image}
+                  </FormHelperText>
+                )}
               </Grid>
-              {/* <Grid item xs={3}>
-                <Button
-                  variant="contained"
-                  component="label"
-                  sx={{ width: "100%"}}
-                >
-                  Upload
-                  <input
-                    hidden
-                    accept="image/*"
-                    type="file"
-                    onChange={(e) => {
-                      setFieldValue("image", e.target.files[0]);
-                      console.log(e.target.files[0]);
-                    }}
-                  />
-                </Button>
-              </Grid> */}
               <Grid item xs={6}>
                 <FormControl
                   fullWidth
@@ -353,7 +306,7 @@ const ProductForm = () => {
                       </MenuItem>
                     ))}
                   </Select>
-                  {!values.categoryId && touched.name && errors.name && (
+                  {!values.categoryId && touched.categoryId && errors.categoryId && (
                     <FormHelperText
                       error
                       id="standard-weight-helper-text-assign"
@@ -481,7 +434,7 @@ const ProductForm = () => {
                     size="large"
                     type="submit"
                     variant="contained"
-                    disabled={Loading || isLoading}
+                    disabled={Loading || isLoading || isSubmitting}
                   >
                     {isEdit === true ? `Update` : `Add`}
                   </LoadingButton>
