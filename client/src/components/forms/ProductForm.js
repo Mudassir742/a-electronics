@@ -96,17 +96,8 @@ const ProductForm = () => {
       const requestURL =
         isEdit === true ? `/update-product/${productId}` : "/add-product";
 
-      // const formData = new FormData();
-      // "name", values.name;
-      // "categoryId", values.categoryId;
-      // "price", values.price;
-      // "model", values.model;
-      // "quantity", values.quantity;
-      // "description", values.description;
-      // "image", values.image;
+      const imageBase_64 = await toBase64(values.image);
 
-      const imageBase_64 = await toBase64(values.image)
-      
       await requestMethod(requestURL, {
         name: values.name,
         categoryId: values.categoryId,
