@@ -14,7 +14,7 @@ exports.addNewProduct = async (req, res) => {
       !description ||
       !quantity ||
       !model ||
-      !image
+      !image.length
     ) {
       return res.status(400).json({
         error: "bad input",
@@ -26,7 +26,10 @@ exports.addNewProduct = async (req, res) => {
       return res.status(404).json({ error: "no category found" });
     }
 
-    const { imageURL } = await uploadImage(image);
+    let imageURL = [];
+    for (let i = 0; i < image.length; i++) {
+      imageURL.push(await uploadImage(image[i]));
+    }
 
     const newProduct = await Product.create({
       categoryId,

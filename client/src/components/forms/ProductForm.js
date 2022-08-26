@@ -139,7 +139,10 @@ const ProductForm = () => {
       const requestURL =
         isEdit === true ? `/update-product/${productId}` : "/add-product";
 
-      const imageBase_64 = await toBase64(values.image);
+      let imageBase_64 = [];
+      for (let i = 0; i < product.images.length; i++) {
+        imageBase_64.push(await toBase64(product.images[i]));
+      }
 
       await requestMethod(requestURL, {
         name: values.name,
@@ -194,7 +197,7 @@ const ProductForm = () => {
           description: Yup.string()
             .max(255)
             .required("Description is required"),
-          image: Yup.string().max(20).required("image field cannot be empty"),
+          //image: Yup.string().max(20).required("image field cannot be empty"),
         })}
         enableReinitialize={true}
         onSubmit={(values) => handleAddProduct.mutate(values)}
@@ -243,7 +246,7 @@ const ProductForm = () => {
                           component="label"
                           onClick={(e) => RemoveImageFromPreview(index)}
                         >
-                          <Icon icon="fluent-emoji-high-contrast:cross-mark"/>
+                          <Icon icon="fluent-emoji-high-contrast:cross-mark" />
                         </RemoveButton>
                       </ImageContainer>
                     </Grid>

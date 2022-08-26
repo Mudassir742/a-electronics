@@ -15,10 +15,7 @@ exports.uploadImage = async (image) => {
         folder: "products",
       },
       (error, result) => {
-        resolve({
-          imagePublicId: result.public_id,
-          imageURL: result.secure_url,
-        });
+        resolve(result.secure_url);
         reject(error);
       }
     );

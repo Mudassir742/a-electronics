@@ -28,7 +28,8 @@ const productSchema = mongoose.Schema(
       required: [true, "enter model name"],
     },
     image: {
-      type: String,
+      type: Array,
+      required: [true, "images are missing"],
     },
   },
 
