@@ -231,7 +231,7 @@ const ProductForm = () => {
                           });
                       }}
                     />
-                    <Icon icon="akar-icons:camera" />
+                    <Icon icon="fluent:camera-add-20-filled" />
                   </UploadButton>
                   {product.images.map((image, index) => (
                     <Grid item xs={3} key={index}>
@@ -243,7 +243,7 @@ const ProductForm = () => {
                           component="label"
                           onClick={(e) => RemoveImageFromPreview(index)}
                         >
-                          <Icon icon="fluent-emoji-high-contrast:cross-mark" />
+                          <Icon icon="fluent-emoji-high-contrast:cross-mark"/>
                         </RemoveButton>
                       </ImageContainer>
                     </Grid>
