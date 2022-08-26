@@ -187,6 +187,7 @@ const ProductForm = () => {
                     color="primary"
                     aria-label="upload picture"
                     component="label"
+                    disabled={product.images.length === 4}
                   >
                     <input
                       hidden
@@ -202,7 +203,13 @@ const ProductForm = () => {
                     />
                     <Icon icon="akar-icons:camera" />
                   </UploadButton>
-                  <Grid item xs={3} padding="1rem">
+                  {product.images.map((image, index) => (
+                    <Grid item xs={3} padding="1rem" key={index}>
+                      <Image src={URL.createObjectURL(image)} alt="laptop" />
+                    </Grid>
+                  ))}
+
+                  {/* <Grid item xs={3} padding="1rem">
                     <Image src={LaptopImage} alt="image" />
                   </Grid>
                   <Grid item xs={3} padding="1rem">
@@ -210,10 +217,7 @@ const ProductForm = () => {
                   </Grid>
                   <Grid item xs={3} padding="1rem">
                     <Image src={LaptopImage} alt="image" />
-                  </Grid>
-                  <Grid item xs={3} padding="1rem">
-                    <Image src={LaptopImage} alt="image" />
-                  </Grid>
+                  </Grid> */}
                 </ImagePreviewBox>
                 {/* <FormControl
                   fullWidth
