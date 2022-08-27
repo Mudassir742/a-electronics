@@ -15,9 +15,20 @@ exports.uploadImage = async (image) => {
         folder: "products",
       },
       (error, result) => {
-        resolve(result.secure_url);
+        resolve({ imageURL: result.secure_url, publicId: result.public_id });
         reject(error);
       }
     );
   });
+};
+
+exports.isURL = (string) => {
+  const reg_EX = new RegExp(
+    "([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?"
+  );
+
+  if (!string || !reg_EX.test(string)) {
+    return false;
+  }
+  return true;
 };
