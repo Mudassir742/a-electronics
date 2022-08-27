@@ -7,20 +7,25 @@ import ScrollToTop from "./components/ScrollToTop";
 //reat-query
 import { QueryClientProvider, QueryClient } from "react-query";
 import { ReactQueryDevtools } from "react-query/devtools";
+//redux
+import store from "./store";
+import { Provider } from "react-redux";
 
-import "./styles/GlobalStyles.css"
+import "./styles/GlobalStyles.css";
 // ----------------------------------------------------------------------
 
 const queryClient = new QueryClient();
 
 export default function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={true} />
-      <ThemeProvider>
-        <ScrollToTop />
-        <Router />
-      </ThemeProvider>
-    </QueryClientProvider>
+    <Provider store={store}>
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <ThemeProvider>
+          <ScrollToTop />
+          <Router />
+        </ThemeProvider>
+      </QueryClientProvider>
+    </Provider>
   );
 }

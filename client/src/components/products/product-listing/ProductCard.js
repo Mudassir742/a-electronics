@@ -10,22 +10,20 @@ import {
   ButtonContainer,
   CardButton,
 } from "./ProductStyles";
-
-import LaptopImage from "src/assets/omenLaptop.png";
 import Icon from "src/components/Iconify";
 
-const ProductCard = () => {
+const ProductCard = ({image,name,price}) => {
   return (
     <CardContainer>
       <ImageWrapper>
-        <Image src={LaptopImage} alt="laptop-image" />
+        <Image src={image && image[0].imageURL} alt="laptop-image" />
       </ImageWrapper>
       <ProductInfoContainer>
         <ProductInfo variant="h5" marginBottom=".6rem">
-          Hp-Omen Laptop
+          {name}
         </ProductInfo>
         <ProductPriceContainer>
-          <ProductInfo fontSize="1.1rem">1000 $</ProductInfo>
+          <ProductInfo fontSize="1.1rem">`${price} $`</ProductInfo>
           <ProductRating>
             <ProductInfo fontSize="1.1rem">4.8(20)</ProductInfo>
             <Icon icon="eva:star-fill" width={28} height={28} color="#FBED21" />
