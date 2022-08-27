@@ -14,9 +14,9 @@ export const productSlice = createSlice({
     },
     [getProducts.fulfilled]: (state, { payload }) => {
       state.loading = false;
-      state.products = [payload];
+      state.products = payload;
     },
-    [getProducts.rejected]: (state, { payload }) => {
+    [getProducts.rejected]: (state) => {
       state.loading = false;
     },
   },

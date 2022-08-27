@@ -12,18 +12,18 @@ import {
 } from "./ProductStyles";
 import Icon from "src/components/Iconify";
 
-const ProductCard = ({image,name,price}) => {
+const ProductCard = ({ image, name, price }) => {
   return (
     <CardContainer>
       <ImageWrapper>
-        <Image src={image && image[0].imageURL} alt="laptop-image" />
+        <Image src={image} alt="laptop-image" />
       </ImageWrapper>
       <ProductInfoContainer>
         <ProductInfo variant="h5" marginBottom=".6rem">
           {name}
         </ProductInfo>
         <ProductPriceContainer>
-          <ProductInfo fontSize="1.1rem">`${price} $`</ProductInfo>
+          <ProductInfo fontSize="1.1rem">{`${price} $`}</ProductInfo>
           <ProductRating>
             <ProductInfo fontSize="1.1rem">4.8(20)</ProductInfo>
             <Icon icon="eva:star-fill" width={28} height={28} color="#FBED21" />
