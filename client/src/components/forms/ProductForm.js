@@ -13,6 +13,8 @@ import {
   Grid,
   IconButton,
   Card,
+  Backdrop,
+  CircularProgress,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 
@@ -150,7 +152,7 @@ const ProductForm = () => {
           imageBase_64.push(product.images[i]);
         }
       }
-      console.log(imageBase_64);
+
       await requestMethod(requestURL, {
         name: values.name,
         categoryId: values.categoryId,
@@ -171,26 +173,24 @@ const ProductForm = () => {
     }
   );
 
-  const removeImageFromPreview = async (
-    imageDetail,
-    deleteIndex
-  ) => {
+  const removeImageFromPreview = async (imageDetail, deleteIndex) => {
+    setLoading(true);
     try {
       if (imageDetail.publicId !== "") {
-      const productResponse =  await productInstance.post("/delete-remote-image", {
+        await productInstance.post("/delete-remote-image", {
           imageDetail,
-          productId
+          productId,
         });
-
-        console.log(productResponse)
       }
 
       setProduct({
         ...product,
         images: product.images.filter((image, index) => index !== deleteIndex),
       });
+      setLoading(false);
     } catch (error) {
       console.log(error);
+      setLoading(false);
     }
   };
 
@@ -204,6 +204,12 @@ const ProductForm = () => {
 
   return (
     <PageWrapper title="Products">
+      <Backdrop
+        sx={{ color: "#fff", zIndex: 1000 }}
+        open={Loading || isLoading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Box marginBottom={3}>
         <Typography variant="h4" gutterBottom>
           {isEdit === true ? `Edit Product` : `Add Product`}

@@ -1,4 +1,13 @@
-import { Modal, Card, Button, Box, Typography, Stack } from "@mui/material";
+import {
+  Modal,
+  Card,
+  Button,
+  Box,
+  Typography,
+  Stack,
+  Backdrop,
+  CircularProgress,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 
 // -------------------------------Style Components-----------------------------------
@@ -28,29 +37,50 @@ const ButtonWrapper = styled(Button)(({ theme, hovercolor, color }) => ({
 
 // -----------------------------------------------------------------------------------
 
-const DeleteModal = ({ title, description, action, setOpen, open }) => {
+const DeleteModal = ({
+  title,
+  description,
+  action,
+  setOpen,
+  open,
+  actionPerforming,
+}) => {
   return (
-    <Modal
-      open={open}
-      onClose={() => setOpen(false)}
-      aria-labelledby="modal-modal-title"
-      aria-describedby="modal-modal-description"
-    >
-      <CardWrapper>
-        <Typography id="modal-modal-title" variant="h6" component="h2">
-          {`Delete ${title}`}
-        </Typography>
-        <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-          {description}
-        </Typography>
-        <ButtonSection>
-          <Stack direction="row" spacing={2}>
-            <ButtonWrapper onClick={() => setOpen(false)}>No</ButtonWrapper>
-            <ButtonWrapper onClick={() => action.mutate()}>Yes</ButtonWrapper>
-          </Stack>
-        </ButtonSection>
-      </CardWrapper>
-    </Modal>
+    <>
+      <Backdrop sx={{ color: "#fff", zIndex: 1000 }} open={actionPerforming}>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+      <Modal
+        open={open || actionPerforming}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <CardWrapper>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+            {`Delete ${title}`}
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            {description}
+          </Typography>
+          <ButtonSection>
+            <Stack direction="row" spacing={2}>
+              <ButtonWrapper
+                disabled={actionPerforming}
+                onClick={() => setOpen(false)}
+              >
+                No
+              </ButtonWrapper>
+              <ButtonWrapper
+                disabled={actionPerforming}
+                onClick={() => action.mutate()}
+              >
+                Yes
+              </ButtonWrapper>
+            </Stack>
+          </ButtonSection>
+        </CardWrapper>
+      </Modal>
+    </>
   );
 };
 

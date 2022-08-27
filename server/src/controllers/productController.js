@@ -31,7 +31,7 @@ exports.addNewProduct = async (req, res) => {
     }
     let images = [];
     for (let i = 0; i < image.length; i++) {
-      images.push(await uploadImage(image[i]));
+      images.push(await uploadImage(image[i].imageURL));
     }
 
     const newProduct = await Product.create({
@@ -65,8 +65,13 @@ exports.deleteProduct = async (req, res) => {
     const isProductDeleted = await Product.findByIdAndDelete({
       _id: productId,
     });
+
     if (!isProductDeleted) {
       return res.status(422).json({ error: "Unable to delete product" });
+    }
+
+    for (let i = 0; i < isProductDeleted.image.length; i++) {
+       await deleteCloudImage(isProductDeleted.image[i].publicId)
     }
 
     const product = await Product.find({}).populate({

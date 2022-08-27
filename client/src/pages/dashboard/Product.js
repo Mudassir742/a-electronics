@@ -45,6 +45,7 @@ export default function Products() {
   const queryClient = useQueryClient();
   const [openDeleteModal, setOpenDeleteModal] = useState(false);
   const [deleteProductId, setDeleteProductId] = useState("");
+  const [actionPerforming, setActionPerforming] = useState(false);
 
   const { data: productList = [], isLoading } = useQuery(
     "products",
@@ -56,6 +57,7 @@ export default function Products() {
 
   const handleDeleteProduct = useMutation(
     async () => {
+      setActionPerforming(true);
       const productResponse = await productInstance.delete(
         `/delete-product/${deleteProductId}`
       );
@@ -65,10 +67,12 @@ export default function Products() {
     {
       onSuccess: (data) => {
         queryClient.setQueryData("products", data);
+        setActionPerforming(false);
         setOpenDeleteModal(false);
       },
       onError: (error) => {
         console.log(error);
+        setActionPerforming(false);
         setOpenDeleteModal(false);
       },
     }
@@ -82,6 +86,7 @@ export default function Products() {
         open={openDeleteModal}
         setOpen={setOpenDeleteModal}
         action={handleDeleteProduct}
+        actionPerforming={actionPerforming}
       />
       <Page title="Categories">
         <Container>
