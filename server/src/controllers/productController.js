@@ -105,7 +105,7 @@ exports.updateProduct = async (req, res) => {
 
     let images = [];
     for (let i = 0; i < image.length; i++) {
-      if (!isURL(images[i].imageURL)) {
+      if (!isURL(image[i].imageURL)) {
         images.push(await uploadImage(image[i].imageURL));
       } else {
         images.push(image[i]);

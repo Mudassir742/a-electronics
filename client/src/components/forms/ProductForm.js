@@ -78,7 +78,7 @@ const Image = styled("img")(({ theme }) => ({
   width: "100%",
 }));
 // -----------------------------------------------------------------------------------
-//fluent-emoji-high-contrast:cross-mark
+
 const ProductForm = () => {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
@@ -141,10 +141,16 @@ const ProductForm = () => {
         isEdit === true ? `/update-product/${productId}` : "/add-product";
 
       let imageBase_64 = [];
+      let imageBlob;
       for (let i = 0; i < product.images.length; i++) {
-        imageBase_64.push(await toBase64(product.images[i]));
+        if (product.images[i].publicId === "") {
+          imageBlob = await toBase64(product.images[i].imageURL);
+          imageBase_64.push({ imageURL: imageBlob, publicId: "" });
+        } else {
+          imageBase_64.push(product.images[i]);
+        }
       }
-
+      console.log(imageBase_64);
       await requestMethod(requestURL, {
         name: values.name,
         categoryId: values.categoryId,
@@ -165,15 +171,31 @@ const ProductForm = () => {
     }
   );
 
-  const removeImageFromPreview = (deleteIndex) => {
-    setProduct({
-      ...product,
-      images: product.images.filter((image, index) => index !== deleteIndex),
-    });
+  const removeImageFromPreview = async (
+    imageDetail,
+    deleteIndex
+  ) => {
+    try {
+      if (imageDetail.publicId !== "") {
+      const productResponse =  await productInstance.post("/delete-remote-image", {
+          imageDetail,
+          productId
+        });
+
+        console.log(productResponse)
+      }
+
+      setProduct({
+        ...product,
+        images: product.images.filter((image, index) => index !== deleteIndex),
+      });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   const generateImageURL = (imageDetail) => {
-    console.log(imageDetail)
+    console.log(imageDetail);
     if (imageDetail.publicId !== "") {
       return imageDetail.imageURL;
     }
@@ -256,7 +278,7 @@ const ProductForm = () => {
                           color="custom"
                           aria-label="remove picture"
                           component="label"
-                          onClick={(e) => removeImageFromPreview(index)}
+                          onClick={(e) => removeImageFromPreview(image, index)}
                         >
                           <Icon icon="fluent-emoji-high-contrast:cross-mark" />
                         </RemoveButton>
