@@ -118,6 +118,7 @@ const ProductForm = () => {
           model: productResponse.data.data.model,
           quantity: productResponse.data.data.quantity,
           description: productResponse.data.data.description,
+          images: [],
         });
         setLoading(false);
       } catch (error) {

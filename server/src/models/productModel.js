@@ -29,7 +29,13 @@ const productSchema = mongoose.Schema(
     },
     image: {
       type: Array,
-      required: [true, "images are missing"],
+      imageURL: {
+        type: String,
+      },
+      publicId: {
+        type: String,
+      },
+      required: [true, "images are required"],
     },
   },
 
