@@ -12,7 +12,7 @@ import {
 } from "./ProductStyles";
 import Icon from "src/components/Iconify";
 
-const ProductCard = ({ image, name, price, action ,productId}) => {
+const ProductCard = ({ image, name, price, action, productId }) => {
   return (
     <CardContainer>
       <ImageWrapper>

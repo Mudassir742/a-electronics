@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
+//react
 import { NavLink } from "react-router-dom";
+//mui
 import {
   useMediaQuery,
   Box,
@@ -9,7 +11,8 @@ import {
   Divider,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
-
+//redux
+import { useSelector } from "react-redux";
 //components
 import CustomerDrawer from "src/components/drawer/CustomerDrawer";
 import Icon from "src/components/Iconify";
@@ -79,6 +82,7 @@ const CustomerNavbar = () => {
   const [style, setStyle] = useState(false);
   const [open, setOpen] = useState(false);
   const isTablet = useMediaQuery("(max-width:768px)");
+  const { cartQuantity } = useSelector((state) => state.cartItems);
 
   useEffect(() => {
     window.addEventListener("scroll", () => {
@@ -125,7 +129,7 @@ const CustomerNavbar = () => {
               <NavLink to="/app/cart" className="link">
                 <CartContainer>
                   <Icon icon="eva:shopping-cart-fill" width={44} height={44} />
-                  <ItemCount>11</ItemCount>
+                  {cartQuantity ? <ItemCount>{cartQuantity}</ItemCount> : <></>}
                 </CartContainer>
               </NavLink>
               <Divider orientation="vertical" />
