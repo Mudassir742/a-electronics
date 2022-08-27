@@ -96,14 +96,21 @@ exports.updateProduct = async (req, res) => {
       !description ||
       !quantity ||
       !model ||
-      !image
+      !image.length
     ) {
       return res.status(400).json({
         error: "bad input",
       });
     }
 
-    const { imageURL } = await uploadImage(image);
+    let images = [];
+    for (let i = 0; i < image.length; i++) {
+      if (!isURL(images[i].imageURL)) {
+        images.push(await uploadImage(image[i].imageURL));
+      } else {
+        images.push(image[i]);
+      }
+    }
 
     const isProductUpdated = await Product.findByIdAndUpdate(
       { _id: productId },
@@ -115,7 +122,7 @@ exports.updateProduct = async (req, res) => {
           description: description,
           quantity: quantity,
           model: model,
-          image: imageURL,
+          image: images,
         },
       }
     );
@@ -174,13 +181,29 @@ exports.showAllProduct = async (req, res) => {
 
 exports.deleteProductImage = async (req, res) => {
   try {
-    const { imagePublicId } = req.body;
+    const { imageDetail, productId } = req.body;
 
-    if (!imagePublicId) {
+    if (!imageDetail || !productId) {
       return res.status(400).json({ error: "bad input" });
     }
 
-    const deleteResponse = await deleteCloudImage(imagePublicId);
+    const isProductUpdated = await Product.findOneAndUpdate(
+      { _id: productId },
+      {
+        $pull: {
+          image: {
+            imageURL: imageDetail.imageURL,
+            publicId: imageDetail.publicId,
+          },
+        },
+      }
+    );
+
+    if (!isProductUpdated) {
+      return res.status(422).json({ error: "Unable to delete product image" });
+    }
+
+    const deleteResponse = await deleteCloudImage(imageDetail.publicId);
 
     if (deleteResponse.result === "not found") {
       return res.status(404).json({ data: "Image not found!" });
