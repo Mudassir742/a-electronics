@@ -5,7 +5,7 @@ import {
   useMediaQuery,
   Box,
   Grid,
-  Typography
+  Typography,
 } from "@mui/material";
 import { styled } from "@mui/material/styles";
 //components
@@ -17,6 +17,7 @@ import Filter from "src/components/products/filter";
 //redux
 import { useDispatch, useSelector } from "react-redux";
 import { getProducts } from "src/store/thunk/productThunk";
+import { addToCart } from "src/store/reducer/cartReducer";
 
 //-------------------------------------------------------------
 const RootStyle = styled(Box)(({ theme }) => ({}));
@@ -44,12 +45,33 @@ const Home = () => {
   const spacingMatch = useMediaQuery("(max-width:600px)");
 
   const { products, loading } = useSelector((state) => state.products);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(getProducts());
     // eslint-disable-next-line
   }, []);
+
+  const addItemToCart = (productId) => {
+    for (let i = 0; i < products.length; i++) {
+      if (products[i]._id === productId) {
+        dispatch(
+          addToCart({
+            itemId: products[i]._id,
+            name: products[i].name,
+            description: products[i].description,
+            unitPrice: products[i].price,
+            quantity: 1,
+            model: products[i].model,
+            image: products[i].image[0].imageURL,
+          })
+        );
+        break;
+      }
+    }
+  };
+
   return (
     <>
       <CustomerDrawer
@@ -71,9 +93,11 @@ const Home = () => {
               products.map((product) => (
                 <Grid item key={product._id} lg={3} md={4} sm={6} xs={12}>
                   <ProductCard
+                    productId={product._id}
                     name={product.name}
                     image={product.image[0].imageURL}
                     price={product.price}
+                    action={addItemToCart}
                   />
                 </Grid>
               ))}

@@ -12,7 +12,7 @@ import {
 } from "./ProductStyles";
 import Icon from "src/components/Iconify";
 
-const ProductCard = ({ image, name, price }) => {
+const ProductCard = ({ image, name, price, action ,productId}) => {
   return (
     <CardContainer>
       <ImageWrapper>
@@ -32,6 +32,7 @@ const ProductCard = ({ image, name, price }) => {
         <ButtonContainer>
           <CardButton
             startIcon={<Icon icon="akar-icons:plus" width={28} height={28} />}
+            onClick={() => action(productId)}
           >
             Add to Cart
           </CardButton>
