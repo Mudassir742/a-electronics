@@ -118,7 +118,7 @@ const ProductForm = () => {
           model: productResponse.data.data.model,
           quantity: productResponse.data.data.quantity,
           description: productResponse.data.data.description,
-          images: [],
+          images: productResponse.data.data.image,
         });
         setLoading(false);
       } catch (error) {
@@ -165,11 +165,19 @@ const ProductForm = () => {
     }
   );
 
-  const RemoveImageFromPreview = (deleteIndex) => {
+  const removeImageFromPreview = (deleteIndex) => {
     setProduct({
       ...product,
       images: product.images.filter((image, index) => index !== deleteIndex),
     });
+  };
+
+  const generateImageURL = (imageDetail) => {
+    console.log(imageDetail)
+    if (imageDetail.publicId !== "") {
+      return imageDetail.imageURL;
+    }
+    return URL.createObjectURL(imageDetail.imageURL);
   };
 
   return (
@@ -231,7 +239,10 @@ const ProductForm = () => {
                         e.target.files[0] &&
                           setProduct({
                             ...product,
-                            images: [...product.images, e.target.files[0]],
+                            images: [
+                              ...product.images,
+                              { imageURL: e.target.files[0], publicId: "" },
+                            ],
                           });
                       }}
                     />
@@ -240,12 +251,12 @@ const ProductForm = () => {
                   {product.images.map((image, index) => (
                     <Grid item xs={3} key={index}>
                       <ImageContainer>
-                        <Image src={URL.createObjectURL(image)} alt="laptop" />
+                        <Image src={generateImageURL(image)} alt="laptop" />
                         <RemoveButton
                           color="custom"
                           aria-label="remove picture"
                           component="label"
-                          onClick={(e) => RemoveImageFromPreview(index)}
+                          onClick={(e) => removeImageFromPreview(index)}
                         >
                           <Icon icon="fluent-emoji-high-contrast:cross-mark" />
                         </RemoveButton>
@@ -254,7 +265,11 @@ const ProductForm = () => {
                   ))}
                 </ImagePreviewBox>
                 {touched.image && errors.image && !values.length && (
-                  <FormHelperText error id="image-error" sx={{margin:'.5rem 0 2rem .8rem'}}>
+                  <FormHelperText
+                    error
+                    id="image-error"
+                    sx={{ margin: ".5rem 0 2rem .8rem" }}
+                  >
                     {errors.image}
                   </FormHelperText>
                 )}
@@ -307,14 +322,16 @@ const ProductForm = () => {
                       </MenuItem>
                     ))}
                   </Select>
-                  {!values.categoryId && touched.categoryId && errors.categoryId && (
-                    <FormHelperText
-                      error
-                      id="standard-weight-helper-text-assign"
-                    >
-                      {errors.categoryId}
-                    </FormHelperText>
-                  )}
+                  {!values.categoryId &&
+                    touched.categoryId &&
+                    errors.categoryId && (
+                      <FormHelperText
+                        error
+                        id="standard-weight-helper-text-assign"
+                      >
+                        {errors.categoryId}
+                      </FormHelperText>
+                    )}
                 </FormControl>
               </Grid>
 
