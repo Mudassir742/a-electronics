@@ -20,6 +20,7 @@ router.delete(
   // verifyRole(["admin"]),
   productController.deleteProduct
 );
+router.post("/delete-remote-image", productController.deleteProductImage);
 router.get("/show-product/:id", productController.showProductById);
 router.get("/show-product/", productController.showAllProduct);
 

@@ -22,6 +22,18 @@ exports.uploadImage = async (image) => {
   });
 };
 
+exports.deleteCloudImage = async (imagePublicId) => {
+  return new Promise((resolve, reject) => {
+    cloudinary.v2.uploader.destroy(
+      imagePublicId,
+      (error, result) => {
+        resolve(result);
+        reject(error);
+      }
+    );
+  });
+};
+
 exports.isURL = (string) => {
   const reg_EX = new RegExp(
     "([a-zA-Z0-9]+://)?([a-zA-Z0-9_]+:[a-zA-Z0-9_]+@)?([a-zA-Z0-9.-]+\\.[A-Za-z]{2,4})(:[0-9]+)?(/.*)?"

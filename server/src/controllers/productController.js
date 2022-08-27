@@ -1,6 +1,10 @@
 const Product = require("../models/productModel");
 const Category = require("../models/categoryModel");
-const { uploadImage, isURL } = require("../lib/cloudinaryImageUpload");
+const {
+  uploadImage,
+  isURL,
+  deleteCloudImage,
+} = require("../lib/cloudinaryImageUpload");
 
 exports.addNewProduct = async (req, res) => {
   try {
@@ -165,5 +169,27 @@ exports.showAllProduct = async (req, res) => {
     return res
       .status(500)
       .json({ error: "Unexpected server error while updating product" });
+  }
+};
+
+exports.deleteProductImage = async (req, res) => {
+  try {
+    const { imagePublicId } = req.body;
+
+    if (!imagePublicId) {
+      return res.status(400).json({ error: "bad input" });
+    }
+
+    const deleteResponse = await deleteCloudImage(imagePublicId);
+
+    if (deleteResponse.result === "not found") {
+      return res.status(404).json({ data: "Image not found!" });
+    }
+    return res.status(201).json({ data: "Image deleted successfully!" });
+  } catch (error) {
+    console.log(error.message);
+    return res
+      .status(500)
+      .json({ error: "Unexpected server error while deleting product image" });
   }
 };
