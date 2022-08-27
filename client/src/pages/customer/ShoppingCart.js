@@ -1,6 +1,8 @@
 //material
-import { Box, Typography, Stack, Grid } from "@mui/material";
+import { Box, Typography, Stack, Grid, useScrollTrigger } from "@mui/material";
 import { styled } from "@mui/material/styles";
+//redux
+import { useSelector } from "react-redux";
 //components
 import ItemImage from "src/assets/omenLaptop.png";
 import CartItem from "src/components/shopping-cart/CartItem";
@@ -25,6 +27,8 @@ const OrderSummary = styled(Box)(({ theme, stickey }) => ({
 //-----------------------------------------------------------
 
 const ShoppingCart = () => {
+  const { cartItems } = useSelector((state) => state.cartItems);
+
   return (
     <RootStyle>
       <Stack direction="row" justifyContent="space-between" marginTop="2rem">
@@ -36,14 +40,20 @@ const ShoppingCart = () => {
       <Grid container margin="2rem 0" spacing={2}>
         <Grid item md={8}>
           <CartContainer>
-            <CartItem ItemImage={ItemImage} />
-            <Divider />
-            <CartItem ItemImage={ItemImage} />
-            <Divider />
-            <CartItem ItemImage={ItemImage} />
-            <Divider />
-            <CartItem ItemImage={ItemImage} />
-            <Divider />
+            {cartItems &&
+              cartItems.map((item) => (
+                <>
+                  <CartItem
+                    ItemImage={item.image}
+                    name={item.name}
+                    quantity={item.quantity}
+                    price={item.unitPrice}
+                    key={item.itemId}
+                    model={item.model}
+                  />
+                  <Divider key={item.itemId} />
+                </>
+              ))}
           </CartContainer>
         </Grid>
         <Grid item md={4}>
