@@ -10,6 +10,9 @@ import CartItem from "src/components/shopping-cart/CartItem";
 const RootStyle = styled("section")(({ theme, stickey }) => ({
   padding: "8rem 5rem 4rem 5rem",
   background: "#EFEEEA",
+  [theme.breakpoints.down(661)]: {
+  padding: "6rem 2rem 1rem 2rem",
+  },
 }));
 const CartContainer = styled(Box)(({ theme, stickey }) => ({}));
 
@@ -44,14 +47,19 @@ const ShoppingCart = () => {
 
   return (
     <RootStyle>
-      <Stack direction="row" justifyContent="space-between" marginTop="2rem">
-        <Typography variant="h4" color="custom" marginLeft="1rem">
-          Items
+      <Stack marginTop="2rem">
+        <Typography
+          variant="h3"
+          marginLeft="1rem"
+          textAlign="center"
+          color="#050704"
+        >
+          BAG
         </Typography>
         {/* <Button color="custom">Clear</Button> */}
       </Stack>
-      <Grid container margin="2rem 0" spacing={2}>
-        <Grid item md={8}>
+      <Grid container margin="2rem 0" spacing={1}>
+        <Grid item lg={8} xs={12}>
           <CartContainer>
             {cartItems &&
               cartItems.map((item) => (
@@ -69,7 +77,7 @@ const ShoppingCart = () => {
               ))}
           </CartContainer>
         </Grid>
-        <Grid item md={4}>
+        <Grid item lg={4} md={6} sm={8} xs={12}>
           <OrderSummary>
             <Typography
               textAlign="center"

@@ -1,17 +1,34 @@
 //material
-import { Box, Typography, Stack, IconButton } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Stack,
+  IconButton,
+  useMediaQuery,
+} from "@mui/material";
 import { styled } from "@mui/material/styles";
 //components
 import Icon from "src/components/Iconify";
 
 //-----------------------------------------------------------------
-const CartItemContainer = styled(Stack)(({ theme, stickey }) => ({
-  margin: "3rem 0 3rem 0",
+const CartItemContainer = styled(Box)(({ theme, stickey }) => ({
+  margin: "3rem 0",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "space-between",
+  [theme.breakpoints.down(661)]: {
+    flexDirection: "column",
+    alignItems: "flex-start",
+    gap:'1rem'
+  },
 }));
 const CartItemCard = styled(Box)(({ theme, stickey }) => ({
   display: "flex",
   alignItems: "center",
   gap: "1rem",
+  [theme.breakpoints.down(661)]: {
+    alignItems: "flex-start",
+  },
 }));
 const Image = styled("img")(({ theme }) => ({
   height: "auto",
@@ -37,17 +54,20 @@ const QuantityLabel = styled(Typography)(({ theme, stickey }) => ({
 //--------------------------------------------------------------------
 
 const CartItem = ({ ItemImage, name, price, quantity, model }) => {
+  const match = useMediaQuery("(max-width:660px)");
+
   return (
-    <CartItemContainer
-      direction="row"
-      alignItems="center"
-      justifyContent="space-between"
-    >
+    <CartItemContainer>
       <CartItemCard>
         <Image src={ItemImage} alt="item" />
         <ItemInfo>
           <Typography>{name}</Typography>
-          <Typography>{model}</Typography>
+          <Typography sx={{ display: match ? "none" : "inline-block" }}>
+            {model}
+          </Typography>
+          <Typography
+            sx={{ display: match ? "inline-block" : "none" }}
+          >{`$${price}`}</Typography>
         </ItemInfo>
       </CartItemCard>
 
@@ -61,7 +81,9 @@ const CartItem = ({ ItemImage, name, price, quantity, model }) => {
         </IconButton>
       </ItemQuantity>
       <Stack direction="row" gap="1rem" alignItems="center">
-        <Typography fontWeight="bold">{`${price}$`}</Typography>
+        <Typography
+          sx={{ display: match ? "none" : "inline-block" }}
+        >{`$${price}`}</Typography>
         <IconButton color="custom">
           <Icon icon="fluent:delete-12-filled" width={20} height={20} />
         </IconButton>
