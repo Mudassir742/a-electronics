@@ -1,10 +1,9 @@
 //material
-import { Box, Typography, Stack, Grid, useScrollTrigger } from "@mui/material";
+import { Box, Typography, Stack, Grid, Card, Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 //redux
 import { useSelector } from "react-redux";
 //components
-import ItemImage from "src/assets/omenLaptop.png";
 import CartItem from "src/components/shopping-cart/CartItem";
 
 //-----------------------------------------------------------
@@ -19,9 +18,23 @@ const Divider = styled(Box)(({ theme, stickey }) => ({
   marginBottom: "1rem",
 }));
 
-const OrderSummary = styled(Box)(({ theme, stickey }) => ({
-  border: "1px solid black",
-  padding: "1rem",
+const OrderSummary = styled(Card)(({ theme, stickey }) => ({
+  borderRadius: "5px",
+  padding: "1.5rem",
+  marginTop: "3rem",
+}));
+
+const CardButton = styled(Button)(({ theme }) => ({
+  display: "flex",
+  height: "40px",
+  width: "100%",
+  alignItems: "center",
+  background: "#050704",
+  color: "white",
+  borderRadius: "5px",
+  "&:hover": {
+    background: "#2C3038",
+  },
 }));
 
 //-----------------------------------------------------------
@@ -57,7 +70,56 @@ const ShoppingCart = () => {
           </CartContainer>
         </Grid>
         <Grid item md={4}>
-          <OrderSummary marginTop="3rem">order summary</OrderSummary>
+          <OrderSummary>
+            <Typography
+              textAlign="center"
+              marginBottom="2rem"
+              variant="h5"
+              color="#050704"
+            >
+              Order Summary
+            </Typography>
+            <Box marginBottom="1rem">
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                marginBottom="1rem"
+              >
+                <Typography color="#050704">Items Subtotal:</Typography>
+                <Typography>$15.0</Typography>
+              </Stack>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                marginBottom="1rem"
+              >
+                <Typography color="#050704">Shipping Fee:</Typography>
+                <Typography>$0.0</Typography>
+              </Stack>
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                marginBottom="1rem"
+              >
+                <Typography color="#050704">Tax:</Typography>
+                <Typography>$0.0</Typography>
+              </Stack>
+              <Divider sx={{ marginTop: "1rem" }} />
+              <Stack
+                direction="row"
+                justifyContent="space-between"
+                marginBottom="1rem"
+              >
+                <Typography color="#050704" fontWeight="bold">
+                  Total:
+                </Typography>
+                <Typography color="#050704" fontWeight="bold">
+                  $15.0
+                </Typography>
+              </Stack>
+            </Box>
+            <CardButton>Proceed to Checkout</CardButton>
+          </OrderSummary>
         </Grid>
       </Grid>
     </RootStyle>
