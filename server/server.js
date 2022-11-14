@@ -12,14 +12,16 @@ const orderRoute = require("./src/routes/orderRoute");
 
 const app = express();
 
-
 app.use(fileUpload());
 app.use(cors());
-app.use(express.json({limit:'50mb'}));
+app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 database.connect();
 
+app.get("/", (req, res) => {
+  res.send("Server is running");
+});
 app.use("/api/user", userRoute);
 app.use("/api/category", categoryRoute);
 app.use("/api/product", productRoute);
@@ -28,3 +30,5 @@ app.use("/api/order", orderRoute);
 app.listen(process.env.PORT, () =>
   console.log(`Server is up and running at port:${process.env.PORT}!`)
 );
+
+module.exports = app;
