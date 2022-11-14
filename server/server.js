@@ -19,6 +19,9 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 
 database.connect();
 
+app.get("/", (req, res) => {
+  res.send("Server is running");
+});
 app.use("/api/user", userRoute);
 app.use("/api/category", categoryRoute);
 app.use("/api/product", productRoute);
